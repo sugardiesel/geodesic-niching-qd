@@ -1,0 +1,32 @@
+{
+  "protocol": "configs\\production_protocol.yaml",
+  "fresh_phase5_only": true,
+  "excluded_prior_runs_note": "Aggregation only reads summaries under this Phase 5 output directory. Earlier sanity runs and k=10 single-seed artifacts are not included.",
+  "seed_policy": "The same fixed seed list is reused for all three conditions.",
+  "conditions": [
+    "baseline_a_handcrafted_map_elites",
+    "baseline_b_learned_bd_euclidean",
+    "contribution_geodesic_niching"
+  ],
+  "metrics": {
+    "coverage_percent": "Coverage (%)",
+    "qd_score": "Shifted QD-score",
+    "raw_qd_score": "Raw QD-score",
+    "max_fitness": "Max fitness",
+    "occupancy_entropy": "Occupancy entropy (coverage-derived)",
+    "mean_pairwise_descriptor_euclidean": "Mean pairwise elite descriptor distance (Euclidean)",
+    "mean_pairwise_descriptor_knn_geodesic": "Mean pairwise elite descriptor distance (k-NN geodesic)",
+    "elapsed_seconds": "Wall-clock runtime (s)",
+    "evaluations_per_second": "Throughput (eval/s)"
+  },
+  "output_files": [
+    "results\\phase5\\phase5_run_summary.csv",
+    "results\\phase5\\phase5_condition_summary.csv",
+    "results\\phase5\\phase5_wilcoxon_paired_tests.csv",
+    "results\\phase5\\phase5_mannwhitney_unpaired_reference.csv",
+    "results\\phase5\\phase5_aggregate_qd_coverage_curves.png",
+    "results\\phase5\\phase5_aggregate_qd_coverage_curves.pdf",
+    "results\\phase5\\phase5_representative_heatmaps.csv",
+    "results\\phase5\\phase5_summary.json"
+  ]
+}

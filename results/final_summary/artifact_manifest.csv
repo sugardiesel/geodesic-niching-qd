@@ -1,0 +1,37 @@
+category,file,source,purpose
+data,data/horseshoe_phase5_run_summary.csv,results/phase5/phase5_run_summary.csv,Unmodified authoritative horseshoe-map source output.
+data,data/horseshoe_phase5_condition_summary.csv,results/phase5/phase5_condition_summary.csv,Unmodified authoritative horseshoe-map source output.
+data,data/horseshoe_phase5_wilcoxon_paired_tests.csv,results/phase5/phase5_wilcoxon_paired_tests.csv,Unmodified authoritative horseshoe-map source output.
+data,data/horseshoe_phase5_representative_heatmaps.csv,results/phase5/phase5_representative_heatmaps.csv,Unmodified authoritative horseshoe-map source output.
+data,data/horseshoe_phase5_summary.json,results/phase5/phase5_summary.json,Unmodified authoritative horseshoe-map source output.
+data,data/open_phase5_run_summary.csv,results/phase6_open_robustness/phase5_run_summary.csv,Unmodified authoritative open-map source output.
+data,data/open_phase5_condition_summary.csv,results/phase6_open_robustness/phase5_condition_summary.csv,Unmodified authoritative open-map source output.
+data,data/open_phase5_wilcoxon_paired_tests.csv,results/phase6_open_robustness/phase5_wilcoxon_paired_tests.csv,Unmodified authoritative open-map source output.
+data,data/open_phase5_representative_heatmaps.csv,results/phase6_open_robustness/phase5_representative_heatmaps.csv,Unmodified authoritative open-map source output.
+data,data/open_phase5_summary.json,results/phase6_open_robustness/phase5_summary.json,Unmodified authoritative open-map source output.
+data,data/corrected_k20_per_seed_metrics.csv,combined from both authoritative phase5_run_summary.csv files,All per-seed metrics for both maps and all three conditions.
+data,data/corrected_k20_condition_mean_std.csv,combined from both authoritative phase5_condition_summary.csv files,Condition-level mean and sample standard deviation for both maps.
+data,data/corrected_k20_wilcoxon_paired_tests.csv,combined from both authoritative phase5_wilcoxon_paired_tests.csv files,"All paired shared-seed Wilcoxon outputs, including exact per-seed arrays."
+data,data/corrected_k20_baseline_b_vs_contribution_wilcoxon.csv,filtered from corrected_k20_wilcoxon_paired_tests.csv,Headline Baseline B versus Contribution paired tests for both maps.
+figure,figures/phase1_5_region_split_distance_scatter.png,results/phase1_distance_diagnostic_corrected/phase1_report_euclidean_vs_geodesic_by_region.png,Corrected Phase 1.5 Euclidean versus true maze-geodesic diagnostic.
+figure,figures/phase1_5_region_split_distance_scatter.pdf,results/phase1_distance_diagnostic_corrected/phase1_report_euclidean_vs_geodesic_by_region.pdf,Corrected Phase 1.5 Euclidean versus true maze-geodesic diagnostic.
+figure,figures/horseshoe_corrected_qd_coverage_curves.png,results/phase5/phase5_aggregate_qd_coverage_curves.png,Corrected horseshoe-map aggregate shifted-QD and coverage curves.
+figure,figures/horseshoe_corrected_qd_coverage_curves.pdf,results/phase5/phase5_aggregate_qd_coverage_curves.pdf,Corrected horseshoe-map aggregate shifted-QD and coverage curves.
+figure,figures/open_corrected_qd_coverage_curves.png,results/phase6_open_robustness/phase5_aggregate_qd_coverage_curves.png,Corrected open-map aggregate shifted-QD and coverage curves.
+figure,figures/open_corrected_qd_coverage_curves.pdf,results/phase6_open_robustness/phase5_aggregate_qd_coverage_curves.pdf,Corrected open-map aggregate shifted-QD and coverage curves.
+figure,figures/corrected_rolling_centroid_connectivity_over_run.png,results/audit_connectivity_verification/penalty_audit/centroid_connectivity_over_run.png,Rolling-only corrected graph reachability over complete production runs.
+figure,figures/corrected_rolling_centroid_connectivity_over_run.pdf,results/audit_connectivity_verification/penalty_audit/centroid_connectivity_over_run.pdf,Rolling-only corrected graph reachability over complete production runs.
+figure,figures/horseshoe_archive_heatmaps_baseline_b_vs_contribution_seed1002.png,"results/phase5/{baseline_b_learned_bd_euclidean,contribution_geodesic_niching}/seed_1002/archive_cells.csv",Same-seed representative archive comparison with a shared fitness scale.
+figure,figures/horseshoe_archive_heatmaps_baseline_b_vs_contribution_seed1002.pdf,"results/phase5/{baseline_b_learned_bd_euclidean,contribution_geodesic_niching}/seed_1002/archive_cells.csv",Same-seed representative archive comparison with a shared fitness scale.
+figure,figures/phase1_horseshoe_u_bottom_detour.png,configs/phase1_horseshoe.yaml + envs/maze_distance.py + results/phase1_environment/phase1_summary.json + results/phase1_distance_diagnostic_corrected/phase1_summary.json,Literal horseshoe map with the corrected Dijkstra path for the u_bottom_detour landmark.
+figure,figures/phase1_horseshoe_u_bottom_detour.pdf,configs/phase1_horseshoe.yaml + envs/maze_distance.py + results/phase1_environment/phase1_summary.json + results/phase1_distance_diagnostic_corrected/phase1_summary.json,Literal horseshoe map with the corrected Dijkstra path for the u_bottom_detour landmark.
+data,data/phase1_horseshoe_u_bottom_detour_provenance.csv,configs/phase1_horseshoe.yaml + envs/maze_distance.py + results/phase1_environment/phase1_summary.json + results/phase1_distance_diagnostic_corrected/phase1_summary.json,Old-versus-corrected Phase 1.5 landmark provenance and impact check.
+data,data/corrected_rolling_static_k_sensitivity_by_map.csv,results/audit_connectivity_verification/penalty_audit/static_k_sensitivity_by_map.csv,Numerical source table for the final connectivity/starvation diagnostics.
+data,data/corrected_rolling_dynamic_k_sensitivity_aggregate.csv,results/audit_connectivity_verification/penalty_audit/dynamic_k_sensitivity_aggregate.csv,Numerical source table for the final connectivity/starvation diagnostics.
+data,data/elite_retention_refresh_connectivity_aggregate.csv,results/elite_support_connectivity_diagnostic/refresh_connectivity_aggregate.csv,Numerical source table for the final connectivity/starvation diagnostics.
+data,data/rolling_only_vs_elite_support_k20.csv,results/elite_support_connectivity_diagnostic/rolling_only_vs_elite_support_k20.csv,Numerical source table for the final connectivity/starvation diagnostics.
+data,data/rolling_only_k_sensitivity_report.csv,results/audit_connectivity_verification/rolling_only_full_refresh_k_sensitivity + penalty_audit/dynamic_k_sensitivity_aggregate.csv,Authoritative rolling-only permanent reachability and final distance ratios.
+figure,figures/k_sensitivity_centroid_starvation_diagnostic.pdf,analysis/report_k_sensitivity_figure.py + results/final_summary/data/rolling_only_k_sensitivity_report.csv,Rolling-only k-sensitivity and permanent-centroid-starvation figure.
+figure,figures/k_sensitivity_centroid_starvation_diagnostic.png,analysis/report_k_sensitivity_figure.py + results/final_summary/data/rolling_only_k_sensitivity_report.csv,Rolling-only k-sensitivity and permanent-centroid-starvation figure.
+figure,figures/k_sensitivity_centroid_starvation_horizontal.pdf,analysis/report_k_sensitivity_figure.py + results/final_summary/data/rolling_only_k_sensitivity_report.csv,Rolling-only k-sensitivity and permanent-centroid-starvation figure.
+figure,figures/k_sensitivity_centroid_starvation_horizontal.png,analysis/report_k_sensitivity_figure.py + results/final_summary/data/rolling_only_k_sensitivity_report.csv,Rolling-only k-sensitivity and permanent-centroid-starvation figure.

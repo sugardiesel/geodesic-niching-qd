@@ -1,0 +1,31 @@
+experiment:
+  name: phase6_open_robustness_baseline_a_handcrafted_map_elites_seed_1003
+  seed: 1003
+  env_config: configs/phase1_open_robustness.yaml
+  output_dir: results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1003
+  budget_rationale: Phase 1 measured about 22 eval/s in the synced .venv. A 2000-evaluation
+    MAP-Elites sanity run should take roughly 1.5 minutes plus plotting overhead on
+    this machine.
+  production_protocol: configs\phase6_open_robustness_protocol.yaml
+  plot_title: 'phase6_open_robustness Baseline A: hand-crafted BD seed 1003'
+algorithm:
+  descriptor: final_xy
+  grid_bins:
+  - 25
+  - 25
+  hidden_dim: 16
+  total_evaluations: 20000
+  initial_random: 300
+  init_scale: 0.7
+  mutation_sigma: 0.18
+  mutation_probability: 0.1
+  log_interval: 25
+metrics:
+  qd_score_fitness_floor: -5.0
+  qd_score_definition: shifted_qd_score = sum(max(raw_fitness - qd_score_fitness_floor,
+    0)) over occupied archive cells
+  raw_qd_score_definition: raw_qd_score = sum(raw_fitness) over occupied archive cells
+  occupancy_entropy_definition: log(filled_cells) / log(total_archive_cells); this
+    is coverage-derived, not a standalone diversity metric
+  pairwise_geodesic_k: 20
+  pairwise_log_interval: 1000

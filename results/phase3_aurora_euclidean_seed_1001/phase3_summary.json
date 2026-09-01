@@ -1,0 +1,51 @@
+{
+  "config": "configs\\phase3_aurora_euclidean.yaml",
+  "env_config": "configs/phase1_horseshoe.yaml",
+  "seed": 1001,
+  "descriptor": "learned_trajectory_autoencoder_latent",
+  "archive_assignment": "euclidean_grid_in_latent_space",
+  "grid_bins": [
+    25,
+    25
+  ],
+  "hidden_dim": 16,
+  "policy_parameter_count": 355,
+  "total_evaluations": 20000,
+  "bootstrap_evaluations": 2000,
+  "autoencoder_device": "cuda",
+  "autoencoder_latent_dim": 2,
+  "autoencoder_final_train_loss": 0.013387793591793845,
+  "autoencoder_final_validation_loss": 0.015484604053199291,
+  "elapsed_seconds": 1112.3285514,
+  "evaluations_per_second": 17.98029905357332,
+  "final_metrics": {
+    "filled_cells": 293,
+    "coverage": 0.4688,
+    "qd_score": 5519.997999999987,
+    "raw_qd_score": 4054.9979999999873,
+    "qd_score_fitness_floor": -5.0,
+    "max_fitness": 29.00999999999989,
+    "mean_fitness": 13.839583617747397,
+    "occupancy_entropy": 0.8823224190777299,
+    "mean_pairwise_descriptor_euclidean": 3.674178697710931,
+    "mean_pairwise_descriptor_knn_geodesic": 3.781685570263576,
+    "pairwise_geodesic_k": 10,
+    "pairwise_geodesic_finite_fraction": 1.0,
+    "pairwise_geodesic_disconnected_pairs": 0
+  },
+  "output_files": [
+    "results\\phase3_aurora_euclidean_seed_1001\\archive_cells.csv",
+    "results\\phase3_aurora_euclidean_seed_1001\\metrics.csv",
+    "results\\phase3_aurora_euclidean_seed_1001\\evaluations.csv",
+    "results\\phase3_aurora_euclidean_seed_1001\\autoencoder_loss.csv",
+    "results\\phase3_aurora_euclidean_seed_1001\\autoencoder_loss.png",
+    "results\\phase3_aurora_euclidean_seed_1001\\autoencoder_loss.pdf",
+    "results\\phase3_aurora_euclidean_seed_1001\\trajectory_reconstruction_examples.png",
+    "results\\phase3_aurora_euclidean_seed_1001\\trajectory_reconstruction_examples.pdf",
+    "results\\phase3_aurora_euclidean_seed_1001\\archive_heatmap_learned_latent.png",
+    "results\\phase3_aurora_euclidean_seed_1001\\archive_heatmap_learned_latent.pdf",
+    "results\\phase3_aurora_euclidean_seed_1001\\qd_score_coverage_curves.png",
+    "results\\phase3_aurora_euclidean_seed_1001\\qd_score_coverage_curves.pdf",
+    "results\\phase3_aurora_euclidean_seed_1001\\phase3_summary.json"
+  ]
+}

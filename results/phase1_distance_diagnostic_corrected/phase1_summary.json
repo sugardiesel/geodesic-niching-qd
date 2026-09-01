@@ -1,0 +1,80 @@
+{
+  "config": "configs/phase1_horseshoe.yaml",
+  "map": "horseshoe_u_corridor",
+  "base_seed": 1729,
+  "correction_scope": "Exact historical Phase 1.5 rollout pair set; only diagonal corner cutting in GridShortestPath is corrected.",
+  "pair_set_validation": {
+    "legacy_pair_source": "results/phase1_environment/phase1_euclidean_vs_geodesic_pairs.csv",
+    "pair_count": 4186,
+    "euclidean_values_match_legacy_csv_at_8_decimals": true,
+    "max_absolute_euclidean_difference_from_saved_csv": 4.995997171519662e-09,
+    "changed_geodesic_pair_count_at_8_decimals": 781,
+    "mean_absolute_geodesic_change": 0.002160505623178612,
+    "max_absolute_geodesic_change": 0.025285747729610897,
+    "region_labels_match_legacy_csv": true
+  },
+  "phase1_5_distance_diagnostic": {
+    "rollouts": 92,
+    "pair_count": 4186,
+    "pearson_correlation": 0.8126499960665475,
+    "horseshoe_region_pair_count": 1314,
+    "open_field_pair_count": 2872,
+    "horseshoe_region_pearson_correlation": 0.47009011347133073,
+    "open_field_pearson_correlation": 0.9985768113053408,
+    "median_geodesic_to_euclidean_ratio": 1.066613311006445,
+    "p95_geodesic_to_euclidean_ratio": 3.313709733341602,
+    "max_geodesic_to_euclidean_ratio": 13.342413714529455,
+    "detour_pair_count_ratio_gt_3": 236,
+    "detour_pair_count_ratio_gt_5": 39
+  },
+  "report_authoritative_values": {
+    "use_these_values_wherever_phase1_5_correlations_are_quoted_in_results": true,
+    "report_text": {
+      "overall_pearson_r": "0.813",
+      "horseshoe_region_pearson_r": "0.470",
+      "open_field_pearson_r": "0.999"
+    },
+    "overall_pearson_r_rounded_3dp": 0.813,
+    "horseshoe_region_pearson_r_rounded_3dp": 0.47,
+    "open_field_pearson_r_rounded_3dp": 0.999,
+    "superseded_overall_pearson_r_rounded_3dp": 0.814,
+    "superseded_horseshoe_region_pearson_r_rounded_3dp": 0.472,
+    "superseded_open_field_pearson_r_rounded_3dp": 0.999,
+    "note": "Use 0.813 overall, 0.470 horseshoe, and 0.999 open-field in the report. These supersede 0.814/0.472/0.999 from the pre-corner-fix output."
+  },
+  "legacy_phase1_5_distance_diagnostic": {
+    "rollouts": 92,
+    "pair_count": 4186,
+    "pearson_correlation": 0.814461465531535,
+    "horseshoe_region_pair_count": 1314,
+    "open_field_pair_count": 2872,
+    "horseshoe_region_pearson_correlation": 0.4723962242386472,
+    "open_field_pearson_correlation": 0.9986711109086749,
+    "median_geodesic_to_euclidean_ratio": 1.0665366313712905,
+    "p95_geodesic_to_euclidean_ratio": 3.2934013644256224,
+    "max_geodesic_to_euclidean_ratio": 13.246413217107829,
+    "detour_pair_count_ratio_gt_3": 233,
+    "detour_pair_count_ratio_gt_5": 37
+  },
+  "landmark_diagnostic_pairs": [
+    {
+      "name": "u_wall_detour",
+      "euclidean": 0.18,
+      "geodesic": 2.420757419958544,
+      "geodesic_to_euclidean_ratio": 13.448652333103023
+    },
+    {
+      "name": "u_bottom_detour",
+      "euclidean": 0.19999999999999996,
+      "geodesic": 2.9204397517766414,
+      "geodesic_to_euclidean_ratio": 14.60219875888321
+    }
+  ],
+  "output_files": [
+    "results\\phase1_distance_diagnostic_corrected\\phase1_euclidean_vs_geodesic_scatter.png",
+    "results\\phase1_distance_diagnostic_corrected\\phase1_euclidean_vs_geodesic_scatter.pdf",
+    "results\\phase1_distance_diagnostic_corrected\\phase1_report_euclidean_vs_geodesic_by_region.png",
+    "results\\phase1_distance_diagnostic_corrected\\phase1_report_euclidean_vs_geodesic_by_region.pdf",
+    "results\\phase1_distance_diagnostic_corrected\\phase1_euclidean_vs_geodesic_pairs.csv"
+  ]
+}

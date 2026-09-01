@@ -1,0 +1,17 @@
+dataset,implementation,seed,graph_k,connected_components_final,finite_centroid_fraction_final,penalized_centroid_distances_final,cumulative_penalized_centroid_distances,refreshes_with_penalty
+horseshoe,pre_fix,1001,5,1,1.0,0,0,0
+horseshoe,pre_fix,1002,5,1,1.0,0,0,0
+horseshoe,pre_fix,1003,5,1,1.0,0,0,0
+horseshoe,pre_fix,1004,5,1,1.0,0,0,0
+horseshoe,pre_fix,1005,5,1,1.0,0,0,0
+horseshoe,post_fix,1001,20,1,0.42592,583050,24498301,41
+horseshoe,post_fix,1002,20,2,0.5182700307692307,489257,22259923,41
+horseshoe,post_fix,1003,20,3,0.4689270153846154,539371,23545725,41
+horseshoe,post_fix,1004,20,1,0.42754658461538464,581398,25676696,41
+horseshoe,post_fix,1005,20,1,0.4505255384615385,558060,24441829,41
+open_robustness,pre_fix,1001,5,1,1.0,0,0,0
+open_robustness,pre_fix,1002,5,1,1.0,0,0,0
+open_robustness,pre_fix,1003,5,1,1.0,0,0,0
+open_robustness,post_fix,1001,20,2,0.5798744615384616,426690,17136333,41
+open_robustness,post_fix,1002,20,1,0.4389878153846154,569778,22594276,41
+open_robustness,post_fix,1003,20,1,0.43243815384615386,576430,24450782,41

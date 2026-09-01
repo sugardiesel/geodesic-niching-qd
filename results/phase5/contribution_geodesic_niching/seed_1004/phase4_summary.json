@@ -1,0 +1,309 @@
+{
+  "config": "results\\phase5\\configs\\contribution_geodesic_niching_seed_1004.yaml",
+  "env_config": "configs/phase1_horseshoe.yaml",
+  "seed": 1004,
+  "descriptor": "learned_trajectory_autoencoder_latent",
+  "archive_assignment": "approximate_geodesic_nearest_centroid_in_2d_latent_space",
+  "grid_bins": [
+    25,
+    25
+  ],
+  "hidden_dim": 16,
+  "policy_parameter_count": 355,
+  "total_evaluations": 20000,
+  "bootstrap_evaluations": 2000,
+  "retrain_evaluations": [
+    10000
+  ],
+  "autoencoder_device": "cuda",
+  "autoencoder_latent_dim": 2,
+  "autoencoder_normalize": true,
+  "autoencoder_derivative_loss_weight": 0.5,
+  "autoencoder_loss_note": "validation loss is MSE in the autoencoder training space; trajectory features are normalized before training; training loss adds derivative MSE with weight 0.5",
+  "autoencoder_final_train_loss": 0.5727933276120354,
+  "autoencoder_final_validation_loss": 0.496395468711853,
+  "autoencoder_normalization_audit": {
+    "used_fit_scope": "all_sequences_including_validation",
+    "comparison_fit_scope": "training_split_only",
+    "training_count": 8500,
+    "validation_count": 1500,
+    "dimension_count": 320,
+    "mean_standardized_mean_delta": 0.004227876989865974,
+    "p95_standardized_mean_delta": 0.006531289053826606,
+    "max_standardized_mean_delta": 0.47874399480979213,
+    "mean_relative_std_delta": 0.003004110219252246,
+    "p95_relative_std_delta": 0.007090078652455325,
+    "max_relative_std_delta": 0.04610688178792125,
+    "used_mean_l2": 6.631009578704834,
+    "train_only_mean_l2": 6.6261701583862305,
+    "used_std_l2": 6.792679309844971,
+    "train_only_std_l2": 6.80684757232666,
+    "per_feature": [
+      {
+        "feature_index": 0,
+        "mean_standardized_mean_delta": 0.002579601280117096,
+        "max_standardized_mean_delta": 0.0065192839941013245,
+        "mean_relative_std_delta": 0.002468590424745857,
+        "max_relative_std_delta": 0.007110527737645365
+      },
+      {
+        "feature_index": 1,
+        "mean_standardized_mean_delta": 0.001356056601018086,
+        "max_standardized_mean_delta": 0.006206825481683886,
+        "mean_relative_std_delta": 0.0023071573906404586,
+        "max_relative_std_delta": 0.006368293901482014
+      },
+      {
+        "feature_index": 2,
+        "mean_standardized_mean_delta": 0.00365051527548293,
+        "max_standardized_mean_delta": 0.010053897155544621,
+        "mean_relative_std_delta": 0.0033376466835095763,
+        "max_relative_std_delta": 0.009855417389815126
+      },
+      {
+        "feature_index": 3,
+        "mean_standardized_mean_delta": 0.0029536756954132637,
+        "max_standardized_mean_delta": 0.008880574056954568,
+        "mean_relative_std_delta": 0.0023653587300343742,
+        "max_relative_std_delta": 0.00803752487082447
+      },
+      {
+        "feature_index": 4,
+        "mean_standardized_mean_delta": 0.010599536097298495,
+        "max_standardized_mean_delta": 0.47874399480979213,
+        "mean_relative_std_delta": 0.0045417978673309625,
+        "max_relative_std_delta": 0.04610688178792125
+      }
+    ]
+  },
+  "autoencoder_bootstrap_normalization_audit": {
+    "used_fit_scope": "all_sequences_including_validation",
+    "comparison_fit_scope": "training_split_only",
+    "training_count": 1700,
+    "validation_count": 300,
+    "dimension_count": 320,
+    "mean_standardized_mean_delta": 0.007542294755279825,
+    "p95_standardized_mean_delta": 0.018009122514662627,
+    "max_standardized_mean_delta": 0.024289343709960512,
+    "mean_relative_std_delta": 0.012403263879233623,
+    "p95_relative_std_delta": 0.024842441897553694,
+    "max_relative_std_delta": 0.07058340643607833,
+    "used_mean_l2": 8.785066604614258,
+    "train_only_mean_l2": 8.77662181854248,
+    "used_std_l2": 3.77817964553833,
+    "train_only_std_l2": 3.8083746433258057,
+    "per_feature": [
+      {
+        "feature_index": 0,
+        "mean_standardized_mean_delta": 0.003691920759347063,
+        "max_standardized_mean_delta": 0.01452844597174494,
+        "mean_relative_std_delta": 0.011226923996530068,
+        "max_relative_std_delta": 0.020407186728183556
+      },
+      {
+        "feature_index": 1,
+        "mean_standardized_mean_delta": 0.007440291454302365,
+        "max_standardized_mean_delta": 0.021958994496179236,
+        "mean_relative_std_delta": 0.007862807044025793,
+        "max_relative_std_delta": 0.015289333466004413
+      },
+      {
+        "feature_index": 2,
+        "mean_standardized_mean_delta": 0.008431397217391105,
+        "max_standardized_mean_delta": 0.02364561393726789,
+        "mean_relative_std_delta": 0.012664829769070574,
+        "max_relative_std_delta": 0.03144790586624601
+      },
+      {
+        "feature_index": 3,
+        "mean_standardized_mean_delta": 0.008147619533080217,
+        "max_standardized_mean_delta": 0.019850354687276115,
+        "mean_relative_std_delta": 0.012009530857204628,
+        "max_relative_std_delta": 0.02390546195602647
+      },
+      {
+        "feature_index": 4,
+        "mean_standardized_mean_delta": 0.010000244812278375,
+        "max_standardized_mean_delta": 0.024289343709960512,
+        "mean_relative_std_delta": 0.018252227729337045,
+        "max_relative_std_delta": 0.07058340643607833
+      }
+    ]
+  },
+  "elapsed_seconds": 951.7533726000001,
+  "evaluations_per_second": 21.013847258942718,
+  "final_metrics": {
+    "filled_cells": 177,
+    "coverage": 0.2832,
+    "qd_score": 3536.1549999999934,
+    "raw_qd_score": 2651.1549999999925,
+    "qd_score_fitness_floor": -5.0,
+    "max_fitness": 26.91499999999999,
+    "mean_fitness": 14.97827683615815,
+    "occupancy_entropy": 0.8040306638398781,
+    "mean_pairwise_descriptor_euclidean": 24.174058480370167,
+    "mean_pairwise_descriptor_knn_geodesic": 24.36650865237578,
+    "pairwise_geodesic_k": 20,
+    "pairwise_geodesic_finite_fraction": 1.0,
+    "pairwise_geodesic_disconnected_pairs": 0,
+    "geodesic_graph_support_points": 1625,
+    "geodesic_graph_visited_points": 20000,
+    "geodesic_graph_reservoir_points": 1000,
+    "geodesic_graph_rolling_buffer_points": 1000,
+    "geodesic_graph_centroids": 625,
+    "geodesic_graph_k": 20,
+    "geodesic_graph_refresh_count": 42,
+    "geodesic_graph_finite_centroid_fraction": 0.42754658461538464,
+    "geodesic_graph_connected_components": 1,
+    "geodesic_graph_largest_component_fraction": 1.0,
+    "geodesic_graph_penalized_centroid_distances": 581398,
+    "geodesic_graph_cumulative_penalized_centroid_distances": 25676696,
+    "geodesic_graph_refreshes_with_penalty": 41,
+    "geodesic_graph_penalty_distance": 201.61154869109558,
+    "geodesic_graph_reservoir_strategy": "rolling_recent_buffer",
+    "geodesic_graph_reservoir_seed": 1004
+  },
+  "trajectory_diagnostics": {
+    "loop_definition": "path_length >= 1.0 and total_abs_turn/(2*pi) >= 1.0 and bbox_area >= 0.02",
+    "near_still_definition": "path_length <= 0.20 and displacement <= 0.10",
+    "bootstrap_count": 2000,
+    "bootstrap_loop_count": 630,
+    "bootstrap_loop_fraction": 0.315,
+    "bootstrap_near_still_count": 948,
+    "bootstrap_near_still_fraction": 0.474,
+    "later_count": 18000,
+    "later_loop_count": 17163,
+    "later_loop_fraction": 0.9535,
+    "later_near_still_count": 20,
+    "later_near_still_fraction": 0.0011111111111111111,
+    "max_loop_score": 15.102877865056621,
+    "median_path_length": 5.833654880523682
+  },
+  "latent_outside_bounds": {
+    "overall_clipped_count": 26,
+    "overall_clipped_fraction": 0.0013,
+    "post_bootstrap_clipped_count": 26,
+    "post_bootstrap_clipped_fraction": 0.0014444444444444444
+  },
+  "reconstruction_quality": {
+    "overall_mse": 0.06751730293035507,
+    "overall_xy_mse": 0.07989663630723953,
+    "loop_count": 17793,
+    "loop_mse": 0.07451099157333374,
+    "loop_xy_mse": 0.08720821887254715,
+    "near_still_count": 968,
+    "near_still_mse": 0.0005468722665682435,
+    "near_still_xy_mse": 0.0010814829729497433
+  },
+  "retrain_events": [
+    {
+      "evaluation": 10000,
+      "train_loss": 0.5727933276120354,
+      "validation_loss": 0.496395468711853,
+      "candidate_count": 10000,
+      "rebuilt_archive_filled_cells": 93,
+      "rebuilt_outside_bounds_fraction": 0.0,
+      "normalization_audit": {
+        "used_fit_scope": "all_sequences_including_validation",
+        "comparison_fit_scope": "training_split_only",
+        "training_count": 8500,
+        "validation_count": 1500,
+        "dimension_count": 320,
+        "mean_standardized_mean_delta": 0.004227876989865974,
+        "p95_standardized_mean_delta": 0.006531289053826606,
+        "max_standardized_mean_delta": 0.47874399480979213,
+        "mean_relative_std_delta": 0.003004110219252246,
+        "p95_relative_std_delta": 0.007090078652455325,
+        "max_relative_std_delta": 0.04610688178792125,
+        "used_mean_l2": 6.631009578704834,
+        "train_only_mean_l2": 6.6261701583862305,
+        "used_std_l2": 6.792679309844971,
+        "train_only_std_l2": 6.80684757232666,
+        "per_feature": [
+          {
+            "feature_index": 0,
+            "mean_standardized_mean_delta": 0.002579601280117096,
+            "max_standardized_mean_delta": 0.0065192839941013245,
+            "mean_relative_std_delta": 0.002468590424745857,
+            "max_relative_std_delta": 0.007110527737645365
+          },
+          {
+            "feature_index": 1,
+            "mean_standardized_mean_delta": 0.001356056601018086,
+            "max_standardized_mean_delta": 0.006206825481683886,
+            "mean_relative_std_delta": 0.0023071573906404586,
+            "max_relative_std_delta": 0.006368293901482014
+          },
+          {
+            "feature_index": 2,
+            "mean_standardized_mean_delta": 0.00365051527548293,
+            "max_standardized_mean_delta": 0.010053897155544621,
+            "mean_relative_std_delta": 0.0033376466835095763,
+            "max_relative_std_delta": 0.009855417389815126
+          },
+          {
+            "feature_index": 3,
+            "mean_standardized_mean_delta": 0.0029536756954132637,
+            "max_standardized_mean_delta": 0.008880574056954568,
+            "mean_relative_std_delta": 0.0023653587300343742,
+            "max_relative_std_delta": 0.00803752487082447
+          },
+          {
+            "feature_index": 4,
+            "mean_standardized_mean_delta": 0.010599536097298495,
+            "max_standardized_mean_delta": 0.47874399480979213,
+            "mean_relative_std_delta": 0.0045417978673309625,
+            "max_relative_std_delta": 0.04610688178792125
+          }
+        ]
+      },
+      "graph_support_points": 1625,
+      "graph_refresh_count": 2
+    }
+  ],
+  "geodesic_graph": {
+    "assignment": "nearest latent grid centroid by approximate k-NN graph shortest-path distance",
+    "parent_selection": "archive elites sampled by normalized geodesic novelty score",
+    "graph_k": 20,
+    "assignment_k": 20,
+    "max_graph_points": 1000,
+    "reservoir_points": 1000,
+    "rolling_buffer_points": 1000,
+    "reservoir_strategy": "rolling_recent_buffer",
+    "reservoir_seed": 1004,
+    "refresh_interval": 250,
+    "support_points": 1625,
+    "visited_points": 20000,
+    "centroid_count": 625,
+    "refresh_count": 42,
+    "finite_centroid_fraction": 0.42754658461538464,
+    "connected_components": 1,
+    "largest_component_fraction": 1.0,
+    "penalized_centroid_distances": 581398,
+    "cumulative_penalized_centroid_distances": 25676696,
+    "refreshes_with_penalty": 41,
+    "penalty_distance": 201.61154869109558
+  },
+  "output_files": [
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\archive_cells.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\metrics.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\evaluations.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\visited_latents_final_space.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\geodesic_graph_support_points.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\autoencoder_loss.csv",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\autoencoder_loss.png",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\autoencoder_loss.pdf",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\trajectory_reconstruction_examples.png",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\trajectory_reconstruction_examples.pdf",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\archive_heatmap_geodesic_latent.png",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\archive_heatmap_geodesic_latent.pdf",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\qd_score_coverage_curves.png",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\qd_score_coverage_curves.pdf",
+    "results\\phase5\\contribution_geodesic_niching\\seed_1004\\phase4_summary.json"
+  ],
+  "pairwise_reporting_metric_recomputed_posthoc": {
+    "k": 20,
+    "source": "final archive_cells.csv descriptors",
+    "reason": "Shared post-audit reporting convention across all conditions."
+  }
+}

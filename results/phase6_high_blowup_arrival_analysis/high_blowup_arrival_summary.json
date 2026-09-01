@@ -1,0 +1,107 @@
+{
+  "analysis": "High-blowup disagreement arrival timing and niche-newness analysis",
+  "input_dir": "results\\phase5\\geodesic_disagreement_analysis_v2",
+  "high_blowup_definition": "blowup_ratio >= 2.0",
+  "typical_definition": "blowup_ratio < 1.5",
+  "first_few_definition": "geodesic assignment rank within seed/cell <= 5",
+  "analysis_scope": "online post-retrain evaluations >= 10001 only",
+  "mutation_distance_status": "Not recoverable from existing Phase 5 artifacts: evaluation CSVs do not store parent IDs, parent genomes, or candidate genomes for every evaluation.",
+  "group_summaries": [
+    {
+      "group": "high_blowup_ge_2",
+      "count": 137,
+      "mean_evaluation": 15679.547445255474,
+      "median_evaluation": 16085.0,
+      "fraction_eval_le_2000": 0.0,
+      "fraction_eval_le_5000": 0.0,
+      "fraction_eval_le_10000": 0.0,
+      "fraction_post_retrain": 1.0,
+      "mean_geodesic_cell_arrival_rank": 13.496350364963504,
+      "median_geodesic_cell_arrival_rank": 7.0,
+      "fraction_first_assignment_to_geodesic_cell": 0.13138686131386862,
+      "fraction_first_few_to_geodesic_cell": 0.41605839416058393,
+      "mean_evaluations_since_first_geodesic_cell_arrival": 3994.2335766423357,
+      "median_evaluations_since_first_geodesic_cell_arrival": 3744.0,
+      "mean_fitness": 15.417547445255433,
+      "median_fitness": 16.82999999999991,
+      "inserted_rate": 0.24817518248175183,
+      "replaced_rate": 0.16058394160583941,
+      "mutated_elite_fraction": 1.0,
+      "bootstrap_random_fraction": 0.0,
+      "mutation_distance_available": false
+    },
+    {
+      "group": "typical_blowup_lt_1_5",
+      "count": 5927,
+      "mean_evaluation": 15023.69613632529,
+      "median_evaluation": 15028.0,
+      "fraction_eval_le_2000": 0.0,
+      "fraction_eval_le_5000": 0.0,
+      "fraction_eval_le_10000": 0.0,
+      "fraction_post_retrain": 1.0,
+      "mean_geodesic_cell_arrival_rank": 49.94854057702042,
+      "median_geodesic_cell_arrival_rank": 23.0,
+      "fraction_first_assignment_to_geodesic_cell": 0.045554243293403074,
+      "fraction_first_few_to_geodesic_cell": 0.17901130420111355,
+      "mean_evaluations_since_first_geodesic_cell_arrival": 4454.870423485743,
+      "median_evaluations_since_first_geodesic_cell_arrival": 4400.0,
+      "mean_fitness": 8.838759406107622,
+      "median_fitness": 7.360999999999991,
+      "inserted_rate": 0.08587818457904504,
+      "replaced_rate": 0.062426185253922725,
+      "mutated_elite_fraction": 1.0,
+      "bootstrap_random_fraction": 0.0,
+      "mutation_distance_available": false
+    }
+  ],
+  "statistical_tests": [
+    {
+      "metric": "evaluation",
+      "label": "evaluation index",
+      "high_mean": 15679.547445255474,
+      "typical_mean": 15023.69613632529,
+      "high_median": 16085.0,
+      "typical_median": 15028.0,
+      "mannwhitney_u": 459744.0,
+      "p_value": 0.00797939934272536
+    },
+    {
+      "metric": "geodesic_cell_arrival_rank",
+      "label": "arrival rank in geodesic niche",
+      "high_mean": 13.496350364963504,
+      "typical_mean": 49.94854057702042,
+      "high_median": 7.0,
+      "typical_median": 23.0,
+      "mannwhitney_u": 226844.0,
+      "p_value": 9.12155509971336e-19
+    },
+    {
+      "metric": "evaluations_since_first_geodesic_cell_arrival",
+      "label": "evaluations since first geodesic niche arrival",
+      "high_mean": 3994.2335766423357,
+      "typical_mean": 4454.870423485743,
+      "high_median": 3744.0,
+      "typical_median": 4400.0,
+      "mannwhitney_u": 366649.5,
+      "p_value": 0.052077173821468065
+    },
+    {
+      "metric": "fitness",
+      "label": "candidate fitness",
+      "high_mean": 15.417547445255433,
+      "typical_mean": 8.838759406107622,
+      "high_median": 16.82999999999991,
+      "typical_median": 7.360999999999991,
+      "mannwhitney_u": 602155.0,
+      "p_value": 3.571271171806827e-22
+    }
+  ],
+  "output_files": [
+    "results\\phase6_high_blowup_arrival_analysis\\high_vs_typical_disagreement_summary.csv",
+    "results\\phase6_high_blowup_arrival_analysis\\high_vs_typical_disagreement_tests.csv",
+    "results\\phase6_high_blowup_arrival_analysis\\disagreement_arrival_ranks.csv",
+    "results\\phase6_high_blowup_arrival_analysis\\high_vs_typical_arrival.png",
+    "results\\phase6_high_blowup_arrival_analysis\\high_vs_typical_arrival.pdf",
+    "results\\phase6_high_blowup_arrival_analysis\\high_blowup_arrival_summary.json"
+  ]
+}

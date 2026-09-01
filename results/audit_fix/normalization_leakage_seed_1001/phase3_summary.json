@@ -1,0 +1,267 @@
+{
+  "config": "configs\\audit_normalization_leakage_seed_1001.yaml",
+  "env_config": "configs/phase1_horseshoe.yaml",
+  "seed": 1001,
+  "descriptor": "learned_trajectory_autoencoder_latent",
+  "archive_assignment": "euclidean_grid_in_2d_latent_space",
+  "grid_bins": [
+    25,
+    25
+  ],
+  "hidden_dim": 16,
+  "policy_parameter_count": 355,
+  "total_evaluations": 10000,
+  "bootstrap_evaluations": 2000,
+  "retrain_evaluations": [
+    10000
+  ],
+  "autoencoder_device": "cuda",
+  "autoencoder_latent_dim": 2,
+  "autoencoder_normalize": true,
+  "autoencoder_derivative_loss_weight": 0.5,
+  "autoencoder_loss_note": "validation loss is MSE in the autoencoder training space; trajectory features are normalized before training; training loss adds derivative MSE with weight 0.5",
+  "autoencoder_final_train_loss": 0.5832702576973859,
+  "autoencoder_final_validation_loss": 0.506994903087616,
+  "autoencoder_normalization_audit": {
+    "used_fit_scope": "all_sequences_including_validation",
+    "comparison_fit_scope": "training_split_only",
+    "training_count": 8500,
+    "validation_count": 1500,
+    "dimension_count": 320,
+    "mean_standardized_mean_delta": 0.00500548422295924,
+    "p95_standardized_mean_delta": 0.009447791591598606,
+    "max_standardized_mean_delta": 0.41676445787622335,
+    "mean_relative_std_delta": 0.002996967129357408,
+    "p95_relative_std_delta": 0.007374491874412954,
+    "max_relative_std_delta": 0.060539182733409226,
+    "used_mean_l2": 6.664860248565674,
+    "train_only_mean_l2": 6.673645973205566,
+    "used_std_l2": 6.657235145568848,
+    "train_only_std_l2": 6.642660617828369,
+    "per_feature": [
+      {
+        "feature_index": 0,
+        "mean_standardized_mean_delta": 0.001954014231593135,
+        "max_standardized_mean_delta": 0.004293932960827226,
+        "mean_relative_std_delta": 0.0014700302734287937,
+        "max_relative_std_delta": 0.0029754538985404945
+      },
+      {
+        "feature_index": 1,
+        "mean_standardized_mean_delta": 0.007879757987702234,
+        "max_standardized_mean_delta": 0.011892192512673807,
+        "mean_relative_std_delta": 0.00519030737104305,
+        "max_relative_std_delta": 0.007943827102338905
+      },
+      {
+        "feature_index": 2,
+        "mean_standardized_mean_delta": 0.0021487714461243994,
+        "max_standardized_mean_delta": 0.006637811362161303,
+        "mean_relative_std_delta": 0.002013547647878208,
+        "max_relative_std_delta": 0.007349189423027189
+      },
+      {
+        "feature_index": 3,
+        "mean_standardized_mean_delta": 0.0034594236074572677,
+        "max_standardized_mean_delta": 0.011009104592879944,
+        "mean_relative_std_delta": 0.0022679357829115017,
+        "max_relative_std_delta": 0.007546845053355261
+      },
+      {
+        "feature_index": 4,
+        "mean_standardized_mean_delta": 0.009585453841919164,
+        "max_standardized_mean_delta": 0.41676445787622335,
+        "mean_relative_std_delta": 0.004043014571525487,
+        "max_relative_std_delta": 0.060539182733409226
+      }
+    ]
+  },
+  "autoencoder_bootstrap_normalization_audit": {
+    "used_fit_scope": "all_sequences_including_validation",
+    "comparison_fit_scope": "training_split_only",
+    "training_count": 1700,
+    "validation_count": 300,
+    "dimension_count": 320,
+    "mean_standardized_mean_delta": 0.007711331068864567,
+    "p95_standardized_mean_delta": 0.019139797465772605,
+    "max_standardized_mean_delta": 0.03301069678883168,
+    "mean_relative_std_delta": 0.015123701512050248,
+    "p95_relative_std_delta": 0.03992671596083755,
+    "max_relative_std_delta": 0.41614387479457143,
+    "used_mean_l2": 8.788990020751953,
+    "train_only_mean_l2": 8.805744171142578,
+    "used_std_l2": 3.7438392639160156,
+    "train_only_std_l2": 3.7168335914611816,
+    "per_feature": [
+      {
+        "feature_index": 0,
+        "mean_standardized_mean_delta": 0.0033382285248630835,
+        "max_standardized_mean_delta": 0.020720535350842055,
+        "mean_relative_std_delta": 0.0035076530180277055,
+        "max_relative_std_delta": 0.008850221546263616
+      },
+      {
+        "feature_index": 1,
+        "mean_standardized_mean_delta": 0.010430516269736598,
+        "max_standardized_mean_delta": 0.015634296736293532,
+        "mean_relative_std_delta": 0.01614631457607566,
+        "max_relative_std_delta": 0.029760256397732714
+      },
+      {
+        "feature_index": 2,
+        "mean_standardized_mean_delta": 0.007471745885529431,
+        "max_standardized_mean_delta": 0.02070410417804238,
+        "mean_relative_std_delta": 0.010934001800765576,
+        "max_relative_std_delta": 0.03966154023848336
+      },
+      {
+        "feature_index": 3,
+        "mean_standardized_mean_delta": 0.005698022696539357,
+        "max_standardized_mean_delta": 0.023722761400272564,
+        "mean_relative_std_delta": 0.01058634529482335,
+        "max_relative_std_delta": 0.03921118423847804
+      },
+      {
+        "feature_index": 4,
+        "mean_standardized_mean_delta": 0.011618141967654368,
+        "max_standardized_mean_delta": 0.03301069678883168,
+        "mean_relative_std_delta": 0.03444419287055894,
+        "max_relative_std_delta": 0.41614387479457143
+      }
+    ]
+  },
+  "elapsed_seconds": 509.8174694999998,
+  "evaluations_per_second": 19.614863354540276,
+  "final_metrics": {
+    "filled_cells": 227,
+    "coverage": 0.3632,
+    "qd_score": 4029.733999999992,
+    "raw_qd_score": 2894.733999999992,
+    "qd_score_fitness_floor": -5.0,
+    "max_fitness": 28.659999999999872,
+    "mean_fitness": 12.752132158590275,
+    "occupancy_entropy": 0.8426777410252432,
+    "mean_pairwise_descriptor_euclidean": 15.48641250189771,
+    "mean_pairwise_descriptor_knn_geodesic": 15.657304635609938,
+    "pairwise_geodesic_k": 20,
+    "pairwise_geodesic_finite_fraction": 1.0,
+    "pairwise_geodesic_disconnected_pairs": 0
+  },
+  "trajectory_diagnostics": {
+    "loop_definition": "path_length >= 1.0 and total_abs_turn/(2*pi) >= 1.0 and bbox_area >= 0.02",
+    "near_still_definition": "path_length <= 0.20 and displacement <= 0.10",
+    "bootstrap_count": 2000,
+    "bootstrap_loop_count": 630,
+    "bootstrap_loop_fraction": 0.315,
+    "bootstrap_near_still_count": 916,
+    "bootstrap_near_still_fraction": 0.458,
+    "later_count": 8000,
+    "later_loop_count": 7435,
+    "later_loop_fraction": 0.929375,
+    "later_near_still_count": 24,
+    "later_near_still_fraction": 0.003,
+    "max_loop_score": 15.581121032333726,
+    "median_path_length": 5.200106620788574
+  },
+  "latent_clipping": {
+    "overall_clipped_count": 42,
+    "overall_clipped_fraction": 0.0042,
+    "post_bootstrap_clipped_count": 42,
+    "post_bootstrap_clipped_fraction": 0.00525
+  },
+  "reconstruction_quality": {
+    "overall_mse": 0.046149395406246185,
+    "overall_xy_mse": 0.050545185804367065,
+    "loop_count": 8065,
+    "loop_mse": 0.05539906397461891,
+    "loop_xy_mse": 0.05926413834095001,
+    "near_still_count": 940,
+    "near_still_mse": 0.00019886967493221164,
+    "near_still_xy_mse": 0.0003417296684347093
+  },
+  "latent_dim_sanity": [],
+  "retrain_events": [
+    {
+      "evaluation": 10000,
+      "train_loss": 0.5832702576973859,
+      "validation_loss": 0.506994903087616,
+      "candidate_count": 10000,
+      "rebuilt_archive_filled_cells": 227,
+      "rebuilt_clip_fraction": 0.0,
+      "normalization_audit": {
+        "used_fit_scope": "all_sequences_including_validation",
+        "comparison_fit_scope": "training_split_only",
+        "training_count": 8500,
+        "validation_count": 1500,
+        "dimension_count": 320,
+        "mean_standardized_mean_delta": 0.00500548422295924,
+        "p95_standardized_mean_delta": 0.009447791591598606,
+        "max_standardized_mean_delta": 0.41676445787622335,
+        "mean_relative_std_delta": 0.002996967129357408,
+        "p95_relative_std_delta": 0.007374491874412954,
+        "max_relative_std_delta": 0.060539182733409226,
+        "used_mean_l2": 6.664860248565674,
+        "train_only_mean_l2": 6.673645973205566,
+        "used_std_l2": 6.657235145568848,
+        "train_only_std_l2": 6.642660617828369,
+        "per_feature": [
+          {
+            "feature_index": 0,
+            "mean_standardized_mean_delta": 0.001954014231593135,
+            "max_standardized_mean_delta": 0.004293932960827226,
+            "mean_relative_std_delta": 0.0014700302734287937,
+            "max_relative_std_delta": 0.0029754538985404945
+          },
+          {
+            "feature_index": 1,
+            "mean_standardized_mean_delta": 0.007879757987702234,
+            "max_standardized_mean_delta": 0.011892192512673807,
+            "mean_relative_std_delta": 0.00519030737104305,
+            "max_relative_std_delta": 0.007943827102338905
+          },
+          {
+            "feature_index": 2,
+            "mean_standardized_mean_delta": 0.0021487714461243994,
+            "max_standardized_mean_delta": 0.006637811362161303,
+            "mean_relative_std_delta": 0.002013547647878208,
+            "max_relative_std_delta": 0.007349189423027189
+          },
+          {
+            "feature_index": 3,
+            "mean_standardized_mean_delta": 0.0034594236074572677,
+            "max_standardized_mean_delta": 0.011009104592879944,
+            "mean_relative_std_delta": 0.0022679357829115017,
+            "max_relative_std_delta": 0.007546845053355261
+          },
+          {
+            "feature_index": 4,
+            "mean_standardized_mean_delta": 0.009585453841919164,
+            "max_standardized_mean_delta": 0.41676445787622335,
+            "mean_relative_std_delta": 0.004043014571525487,
+            "max_relative_std_delta": 0.060539182733409226
+          }
+        ]
+      }
+    }
+  ],
+  "representative_sample": {
+    "enabled": false
+  },
+  "output_files": [
+    "results\\audit_fix\\normalization_leakage_seed_1001\\archive_cells.csv",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\metrics.csv",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\evaluations.csv",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\autoencoder_loss.csv",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\latent_dim_sanity.csv",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\autoencoder_final.pt",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\autoencoder_loss.png",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\autoencoder_loss.pdf",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\trajectory_reconstruction_examples.png",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\trajectory_reconstruction_examples.pdf",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\archive_heatmap_learned_latent.png",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\archive_heatmap_learned_latent.pdf",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\qd_score_coverage_curves.png",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\qd_score_coverage_curves.pdf",
+    "results\\audit_fix\\normalization_leakage_seed_1001\\phase3_summary.json"
+  ]
+}

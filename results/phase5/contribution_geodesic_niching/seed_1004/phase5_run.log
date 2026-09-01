@@ -1,0 +1,28 @@
+PHASE 4 GEODESIC-NICHING SUMMARY
+config: results\phase5\configs\contribution_geodesic_niching_seed_1004.yaml
+seed: 1004
+archive_assignment: approximate_geodesic_nearest_centroid_in_2d_latent_space
+autoencoder final loss: train=0.572793, validation=0.496395
+runtime: 20000 evals in 951.753s = 21.01 eval/s
+final archive: filled=177, coverage=28.320%, QD-score=3536.155, raw QD-score=2651.155, max fitness=26.915, mean fitness=14.978, occupancy_entropy=0.804
+pairwise descriptor distances: euclidean=24.174, knn-geodesic=24.367, finite=1.000
+trajectory loops: bootstrap=630/2000 (31.500%), later=17163/18000 (95.350%)
+latent outside bounds: overall=0.130%, post-bootstrap=0.144%
+reconstruction MSE: overall=0.067517, near-still=0.000547, loop=0.074511
+geodesic graph: support=1625, visited=20000, centroids=625, rolling_buffer=1000, k=20, refreshes=42, finite_centroid_fraction=0.428, components=1, penalized=581398
+output files:
+  results\phase5\contribution_geodesic_niching\seed_1004\archive_cells.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\metrics.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\evaluations.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\visited_latents_final_space.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\geodesic_graph_support_points.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\autoencoder_loss.csv
+  results\phase5\contribution_geodesic_niching\seed_1004\autoencoder_loss.png
+  results\phase5\contribution_geodesic_niching\seed_1004\autoencoder_loss.pdf
+  results\phase5\contribution_geodesic_niching\seed_1004\trajectory_reconstruction_examples.png
+  results\phase5\contribution_geodesic_niching\seed_1004\trajectory_reconstruction_examples.pdf
+  results\phase5\contribution_geodesic_niching\seed_1004\archive_heatmap_geodesic_latent.png
+  results\phase5\contribution_geodesic_niching\seed_1004\archive_heatmap_geodesic_latent.pdf
+  results\phase5\contribution_geodesic_niching\seed_1004\qd_score_coverage_curves.png
+  results\phase5\contribution_geodesic_niching\seed_1004\qd_score_coverage_curves.pdf
+  results\phase5\contribution_geodesic_niching\seed_1004\phase4_summary.json

@@ -1,0 +1,132 @@
+experiment:
+  name: phase1_horseshoe_primary
+  description: Primary ForageMaze2D map with a deliberate U-shaped wall so some positions are close in Euclidean distance but far by traversable shortest path.
+  base_seed: 1729
+  seed_policy: Use base_seed for deterministic validation. For batches, derived_seed = base_seed + policy_index * 1009 + replicate_index.
+
+episode:
+  max_steps: 280
+  dt: 0.08
+
+agent:
+  radius: 0.025
+  start_position: [-0.74, -0.76]
+  start_heading: 0.35
+  start_jitter: 0.015
+  initial_energy: 1.0
+  max_energy: 1.25
+  max_speed: 0.82
+  turn_rate: 5.2
+  thrust_accel: 1.9
+  linear_drag: 0.985
+  brake_drag: 0.72
+
+fitness:
+  alive_reward: 0.008
+  food_reward_scale: 1.0
+  energy_decay: 0.0062
+  movement_energy_cost: 0.0015
+  wall_collision_penalty: 0.035
+  hazard_penalty_scale: 1.0
+  exploration_cell_size: 0.10
+  exploration_reward: 0.045
+
+observation:
+  ray_count: 8
+  ray_range: 0.52
+  ray_steps: 14
+
+map:
+  name: horseshoe_u_corridor
+  world_min: [-1.0, -1.0]
+  world_max: [1.0, 1.0]
+  walls:
+    - name: u_left_arm
+      x_min: -0.25
+      y_min: -0.70
+      x_max: -0.17
+      y_max: 0.55
+    - name: u_right_arm
+      x_min: 0.17
+      y_min: -0.70
+      x_max: 0.25
+      y_max: 0.55
+    - name: u_bottom
+      x_min: -0.25
+      y_min: -0.70
+      x_max: 0.25
+      y_max: -0.62
+    - name: left_route_baffle
+      x_min: -0.80
+      y_min: -0.18
+      x_max: -0.52
+      y_max: -0.10
+    - name: right_route_baffle
+      x_min: 0.48
+      y_min: 0.10
+      x_max: 0.78
+      y_max: 0.18
+  foods:
+    - name: start_patch
+      position: [-0.72, -0.52]
+      radius: 0.055
+      reward: 2.4
+      energy_gain: 0.28
+      respawn_steps: 90
+    - name: top_gate
+      position: [-0.08, 0.73]
+      radius: 0.055
+      reward: 3.2
+      energy_gain: 0.35
+      respawn_steps: 100
+    - name: inside_horseshoe
+      position: [0.00, -0.48]
+      radius: 0.060
+      reward: 8.0
+      energy_gain: 0.55
+      respawn_steps: 130
+    - name: right_field
+      position: [0.70, -0.55]
+      radius: 0.055
+      reward: 3.6
+      energy_gain: 0.36
+      respawn_steps: 95
+    - name: upper_left_field
+      position: [-0.72, 0.62]
+      radius: 0.055
+      reward: 3.0
+      energy_gain: 0.34
+      respawn_steps: 95
+  hazards:
+    - name: mouth_hazard
+      position: [0.00, 0.58]
+      radius: 0.070
+      penalty: 0.12
+      energy_drain: 0.020
+    - name: lower_right_hazard
+      position: [0.55, -0.77]
+      radius: 0.090
+      penalty: 0.10
+      energy_drain: 0.017
+  diagnostic_pairs:
+    - name: u_wall_detour
+      a: [-0.30, -0.56]
+      b: [-0.12, -0.56]
+    - name: u_bottom_detour
+      a: [0.00, -0.76]
+      b: [0.00, -0.56]
+
+shortest_path:
+  grid_size: 140
+  connectivity: 8
+
+diagnostic:
+  horseshoe_region:
+    x_min: -0.36
+    y_min: -0.84
+    x_max: 0.36
+    y_max: 0.68
+
+validation:
+  random_policy_count: 80
+  speed_benchmark_evaluations: 500

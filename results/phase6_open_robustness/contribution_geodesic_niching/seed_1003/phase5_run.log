@@ -1,0 +1,28 @@
+PHASE 4 GEODESIC-NICHING SUMMARY
+config: results\phase6_open_robustness\configs\contribution_geodesic_niching_seed_1003.yaml
+seed: 1003
+archive_assignment: approximate_geodesic_nearest_centroid_in_2d_latent_space
+autoencoder final loss: train=0.556276, validation=0.544201
+runtime: 20000 evals in 839.856s = 23.81 eval/s
+final archive: filled=198, coverage=31.680%, QD-score=4651.631, raw QD-score=3661.631, max fitness=32.965, mean fitness=18.493, occupancy_entropy=0.821
+pairwise descriptor distances: euclidean=19.085, knn-geodesic=19.280, finite=1.000
+trajectory loops: bootstrap=666/2000 (33.300%), later=16488/18000 (91.600%)
+latent outside bounds: overall=0.540%, post-bootstrap=0.600%
+reconstruction MSE: overall=0.095463, near-still=0.000836, loop=0.106873
+geodesic graph: support=1625, visited=20000, centroids=625, rolling_buffer=1000, k=20, refreshes=42, finite_centroid_fraction=0.432, components=1, penalized=576430
+output files:
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\archive_cells.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\metrics.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\evaluations.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\visited_latents_final_space.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\geodesic_graph_support_points.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\autoencoder_loss.csv
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\autoencoder_loss.png
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\autoencoder_loss.pdf
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\trajectory_reconstruction_examples.png
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\trajectory_reconstruction_examples.pdf
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\archive_heatmap_geodesic_latent.png
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\archive_heatmap_geodesic_latent.pdf
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\qd_score_coverage_curves.png
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\qd_score_coverage_curves.pdf
+  results\phase6_open_robustness\contribution_geodesic_niching\seed_1003\phase4_summary.json

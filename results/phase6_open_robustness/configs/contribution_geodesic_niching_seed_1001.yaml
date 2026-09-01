@@ -1,0 +1,64 @@
+experiment:
+  name: phase6_open_robustness_contribution_geodesic_niching_seed_1001
+  seed: 1001
+  env_config: configs/phase1_open_robustness.yaml
+  output_dir: results\phase6_open_robustness\contribution_geodesic_niching\seed_1001
+  production_protocol: configs\phase6_open_robustness_protocol.yaml
+  plot_title: 'phase6_open_robustness Contribution: geodesic niching seed 1001'
+algorithm:
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: approximate_geodesic_nearest_centroid_in_2d_latent_space
+  grid_bins:
+  - 25
+  - 25
+  hidden_dim: 16
+  total_evaluations: 20000
+  bootstrap_evaluations: 2000
+  retrain_evaluations:
+  - 10000
+  init_scale: 0.7
+  mutation_sigma: 0.18
+  mutation_probability: 0.1
+  log_interval: 100
+trajectory:
+  sequence_length: 64
+  features:
+  - x
+  - y
+  - vx
+  - vy
+  - energy
+autoencoder:
+  latent_dim: 2
+  epochs: 80
+  batch_size: 128
+  learning_rate: 0.001
+  validation_fraction: 0.15
+  device: auto
+  latent_bounds_padding_fraction: 0.15
+  normalize: true
+  derivative_loss_weight: 0.5
+geodesic:
+  graph_k: 20
+  assignment_k: 20
+  max_graph_points: 1000
+  reservoir_strategy: rolling_recent_buffer
+  include_archive_elites_in_support: false
+  reservoir_seed: null
+  refresh_interval: 250
+  selection_novelty_neighbors: 10
+  selection_novelty_floor: 0.05
+  approximation_note: A combined-set k-NN rule is refreshed periodically over endpoint-only
+    grid centroids plus the most recent 1,000 visited latent points. Centroid-centroid
+    edges are excluded and centroids cannot be shortest-path transit nodes. Disconnected
+    distances use a finite penalty derived from the larger of the finite shortest-path
+    scale and support-set Euclidean diameter.
+metrics:
+  qd_score_fitness_floor: -5.0
+  qd_score_definition: shifted_qd_score = sum(max(raw_fitness - qd_score_fitness_floor,
+    0)) over occupied archive cells
+  raw_qd_score_definition: raw_qd_score = sum(raw_fitness) over occupied archive cells
+  occupancy_entropy_definition: log(filled_cells) / log(total_archive_cells); coverage-derived
+    only
+  pairwise_geodesic_k: 20
+  pairwise_log_interval: 1000

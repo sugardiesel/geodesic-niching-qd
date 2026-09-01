@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# uv local cache
+.uv-cache/
+
+# Local report workspace and rendered submission (submitted separately)
+report/
+
+# Local project diaries and audit history, not part of the examiner-facing code tree
+docs/
+appendix_notes.md
+ai_use_log.md
+clauderevision.txt
+
+# Historical outputs preserved locally and in earlier commits, not in the examiner tree
+results_pre_audit_fix/
+
+# Local scratch and reproduction workspaces
+tmp/
+reproduced/
+
+# Superseded local packaging files
+requirements.txt
+experiments/
+
+# Matplotlib local cache
+.matplotlib-cache/
+.matplotlib/
+
+# Large generated experiment artifacts
+results/**/*.npy
+results/**/*.npz
+results/**/*.pt
+results/**/*.pth
+results/**/*.ckpt
+results/**/*.zip
+results/**/*.pkl
+results/**/checkpoints/
+results/**/archives/
+
+# Local/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store

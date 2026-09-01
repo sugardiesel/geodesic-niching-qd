@@ -1,0 +1,32 @@
+PHASE 3 AURORA-STYLE EUCLIDEAN BASELINE SUMMARY
+config: results\phase5\configs\baseline_b_learned_bd_euclidean_seed_1001.yaml
+env_config: configs/phase1_horseshoe.yaml
+seed: 1001
+descriptor: learned_trajectory_autoencoder_latent
+archive_assignment: euclidean_grid_in_2d_latent_space
+autoencoder_device: cuda
+autoencoder final loss: train=0.583270, validation=0.506995
+runtime: 20000 evals in 1043.783s = 19.16 eval/s
+final archive: filled=264, coverage=42.240%, QD-score=5406.373, raw QD-score=4086.373, max fitness=28.905, mean fitness=15.479
+pairwise descriptor distances: euclidean=16.445, knn-geodesic=18.822, finite=1.000
+trajectory loops: bootstrap=630/2000 (31.500%), later=16995/18000 (94.417%)
+latent clipping: overall=0.210%, post-bootstrap=0.233%
+reconstruction MSE: overall=0.060794, near-still=0.000200, loop=0.067367
+output files:
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\archive_cells.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\metrics.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\evaluations.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\autoencoder_loss.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\latent_dim_sanity.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\autoencoder_final.pt
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\representative_trajectory_sample.npz
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\representative_trajectory_sample.csv
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\autoencoder_loss.png
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\autoencoder_loss.pdf
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\trajectory_reconstruction_examples.png
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\trajectory_reconstruction_examples.pdf
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\archive_heatmap_learned_latent.png
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\archive_heatmap_learned_latent.pdf
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\qd_score_coverage_curves.png
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\qd_score_coverage_curves.pdf
+  results\phase5\baseline_b_learned_bd_euclidean\seed_1001\phase3_summary.json

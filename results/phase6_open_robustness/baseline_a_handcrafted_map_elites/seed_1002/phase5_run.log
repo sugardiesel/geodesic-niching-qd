@@ -1,0 +1,19 @@
+PHASE 2 HAND-CRAFTED MAP-ELITES SUMMARY
+config: results\phase6_open_robustness\configs\baseline_a_handcrafted_map_elites_seed_1002.yaml
+env_config: configs/phase1_open_robustness.yaml
+seed: 1002
+descriptor: final_xy
+grid_bins: [25, 25]
+parameter_count: 355
+runtime: 20000 evals in 939.655s = 21.28 eval/s
+final archive: filled=617, coverage=98.720%, QD-score=18206.366, max fitness=32.150, mean fitness=24.508
+occupancy entropy (coverage-derived): 0.998
+output files:
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\archive_cells.csv
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\metrics.csv
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\evaluations.csv
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\archive_heatmap_final_xy.png
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\archive_heatmap_final_xy.pdf
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\qd_score_coverage_curves.png
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\qd_score_coverage_curves.pdf
+  results\phase6_open_robustness\baseline_a_handcrafted_map_elites\seed_1002\phase2_summary.json

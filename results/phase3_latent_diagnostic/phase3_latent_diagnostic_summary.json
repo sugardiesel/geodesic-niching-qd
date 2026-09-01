@@ -1,0 +1,145 @@
+{
+  "diagnostic_mode": "representative_locked_baseline_b_run_sample",
+  "phase3_config": "configs\\phase3_aurora_euclidean.yaml",
+  "checkpoint": "results\\phase3b_aurora_one_retrain_normalized_seed_1001\\autoencoder_final.pt",
+  "sample_npz": "results\\phase3b_aurora_one_retrain_normalized_seed_1001\\representative_trajectory_sample.npz",
+  "env_config": "configs/phase1_horseshoe.yaml",
+  "sample_count": 400,
+  "evaluation_min": 23,
+  "evaluation_max": 19968,
+  "loop_fraction": 0.8725,
+  "near_still_fraction": 0.0375,
+  "pair_count": 79800,
+  "device": "cuda",
+  "sequence_length": 64,
+  "feature_names": [
+    "x",
+    "y",
+    "vx",
+    "vy",
+    "energy"
+  ],
+  "latent_reencode_max_abs_diff": 0.0,
+  "latent_distance_vs_maze_geodesic": {
+    "overall_pair_count": 79800,
+    "overall_pearson_r": 0.20499642439149604,
+    "horseshoe_region_pair_count": 57303,
+    "horseshoe_region_pearson_r": 0.18123365332300184,
+    "open_field_pair_count": 22497,
+    "open_field_pearson_r": 0.18913079427002036,
+    "latent_distance_mean": 8.082929696355116,
+    "latent_distance_std": 5.081522297871974,
+    "maze_geodesic_mean": 1.3115263167313322,
+    "maze_geodesic_std": 0.6555571646685975
+  },
+  "latent_scale_check": {
+    "sample_mean_pairwise_latent_euclidean": 8.082929696355116,
+    "sample_pairwise_distribution": {
+      "point_count": 400,
+      "pair_count": 79800,
+      "mean": 8.082929696355116,
+      "median": 7.171083155943472,
+      "q75": 10.852216695050455,
+      "q90": 15.157246452035206,
+      "max": 39.132201403382716
+    },
+    "archive_mean_pairwise_elite_descriptor_euclidean": 16.4447542015096,
+    "archive_pairwise_distribution": {
+      "point_count": 264,
+      "pair_count": 34716,
+      "mean": 16.4447542015096,
+      "median": 15.783822869731988,
+      "q75": 21.986970222935092,
+      "q90": 27.761297068652837,
+      "max": 50.678627418082144
+    },
+    "sample_to_archive_mean_ratio": 0.49152025000246685,
+    "sample_loop_only_pairwise_distribution": {
+      "point_count": 349,
+      "pair_count": 60726,
+      "mean": 8.523349196805212,
+      "median": 7.643530986930552,
+      "q75": 11.388210859851872,
+      "q90": 15.737042103433094,
+      "max": 39.132201403382716
+    },
+    "sample_non_loop_pairwise_distribution": {
+      "point_count": 51,
+      "pair_count": 1275,
+      "mean": 3.4713920929168243,
+      "median": 1.6609465246079576,
+      "q75": 4.649783965299096,
+      "q90": 9.599835144362801,
+      "max": 25.04015985589327
+    },
+    "sample_near_still_pairwise_distribution": {
+      "point_count": 15,
+      "pair_count": 105,
+      "mean": 0.05219497045057481,
+      "median": 0.04576209560727348,
+      "q75": 0.06873972029767265,
+      "q90": 0.09430839525271513,
+      "max": 0.13869603015080295
+    },
+    "sample_non_near_still_pairwise_distribution": {
+      "point_count": 385,
+      "pair_count": 73920,
+      "mean": 8.278292210786068,
+      "median": 7.367072627744058,
+      "q75": 11.094594562709867,
+      "q90": 15.406188813243364,
+      "max": 39.132201403382716
+    },
+    "sample_early_bootstrap_pairwise_distribution": {
+      "point_count": 40,
+      "pair_count": 780,
+      "mean": 1.5281074181783407,
+      "median": 0.7843758984581114,
+      "q75": 2.661631154179265,
+      "q90": 3.8721867602418283,
+      "max": 6.082887943198213
+    },
+    "sample_middle_pre_retrain_pairwise_distribution": {
+      "point_count": 160,
+      "pair_count": 12720,
+      "mean": 8.148149803366193,
+      "median": 7.1978883328896375,
+      "q75": 10.853452811372755,
+      "q90": 15.262671648456752,
+      "max": 36.78140145826202
+    },
+    "sample_late_post_retrain_pairwise_distribution": {
+      "point_count": 200,
+      "pair_count": 19900,
+      "mean": 8.860882466431555,
+      "median": 7.909569913481305,
+      "q75": 11.898623930376052,
+      "q90": 16.236994159899726,
+      "max": 37.280739156788094
+    },
+    "sample_top_10_percent_fitness_pairwise_distribution": {
+      "point_count": 40,
+      "pair_count": 780,
+      "mean": 11.882256325070117,
+      "median": 10.670558565192575,
+      "q75": 16.48452670232319,
+      "q90": 21.95643325597316,
+      "max": 39.132201403382716
+    },
+    "rough_archive_cell_coverage_by_sample": {
+      "note": "Uses archive elite descriptor min/max as a rough scale check, not the exact padded archive bounds.",
+      "archive_elite_count": 264,
+      "sample_count": 400,
+      "sample_points_inside_archive_descriptor_range": 399,
+      "sample_occupied_rough_cells": 137
+    },
+    "scale_diagnosis": "The checkpoint re-encoding path is internally consistent; remaining scale difference is expected when comparing a random cross-section of evaluated policies with the final archive elites, because the archive metric is computed only over filled-cell elites and therefore emphasizes descriptor spread.",
+    "scale_interpretation": "Comparable if ratio is close to 1; large deviations mean sampled evaluated policies occupy a different latent spread than final elites."
+  },
+  "output_files": [
+    "results\\phase3_latent_diagnostic\\phase3_representative_latent_vs_maze_geodesic_pairs.csv",
+    "results\\phase3_latent_diagnostic\\phase3_representative_latent_vs_maze_geodesic_by_region.png",
+    "results\\phase3_latent_diagnostic\\phase3_representative_latent_vs_maze_geodesic_by_region.pdf",
+    "results\\phase3_latent_diagnostic\\phase3_latent_diagnostic_summary.json"
+  ]
+}

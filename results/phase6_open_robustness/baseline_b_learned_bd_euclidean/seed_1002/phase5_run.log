@@ -1,0 +1,32 @@
+PHASE 3 AURORA-STYLE EUCLIDEAN BASELINE SUMMARY
+config: results\phase6_open_robustness\configs\baseline_b_learned_bd_euclidean_seed_1002.yaml
+env_config: configs/phase1_open_robustness.yaml
+seed: 1002
+descriptor: learned_trajectory_autoencoder_latent
+archive_assignment: euclidean_grid_in_2d_latent_space
+autoencoder_device: cuda
+autoencoder final loss: train=0.587543, validation=0.576571
+runtime: 20000 evals in 898.608s = 22.26 eval/s
+final archive: filled=258, coverage=41.280%, QD-score=5644.663, raw QD-score=4354.663, max fitness=33.025, mean fitness=16.879
+pairwise descriptor distances: euclidean=19.950, knn-geodesic=22.269, finite=1.000
+trajectory loops: bootstrap=629/2000 (31.450%), later=16121/18000 (89.561%)
+latent clipping: overall=0.045%, post-bootstrap=0.050%
+reconstruction MSE: overall=0.097517, near-still=0.000327, loop=0.111476
+output files:
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\archive_cells.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\metrics.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\evaluations.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\autoencoder_loss.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\latent_dim_sanity.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\autoencoder_final.pt
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\representative_trajectory_sample.npz
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\representative_trajectory_sample.csv
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\autoencoder_loss.png
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\autoencoder_loss.pdf
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\trajectory_reconstruction_examples.png
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\trajectory_reconstruction_examples.pdf
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\archive_heatmap_learned_latent.png
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\archive_heatmap_learned_latent.pdf
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\qd_score_coverage_curves.png
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\qd_score_coverage_curves.pdf
+  results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1002\phase3_summary.json

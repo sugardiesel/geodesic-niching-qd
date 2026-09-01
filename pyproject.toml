@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geodesic-qd-alife"
+version = "0.1.0"
+description = "From-scratch quality-diversity experiments with learned behavior descriptors and geodesic niching."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+authors = [
+  { name = "Matteo" }
+]
+dependencies = [
+  "numpy==2.2.6",
+  "scipy==1.15.3",
+  "scikit-learn==1.6.1",
+  "matplotlib==3.10.3",
+  "pandas==2.2.3",
+  "seaborn==0.13.2",
+  "networkx==3.4.2",
+  "tqdm==4.67.1",
+  "PyYAML==6.0.2",
+  "umap-learn==0.5.7",
+  "torch==2.11.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.3.5",
+  "ruff==0.11.13"
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["envs*", "algorithms*", "experiments*", "analysis*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]  # Scripts intentionally set the project path and Matplotlib backend first.

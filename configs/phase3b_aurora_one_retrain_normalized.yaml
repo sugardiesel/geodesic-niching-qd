@@ -1,0 +1,46 @@
+experiment:
+  name: phase3b_aurora_one_retrain_normalized_seed_1001
+  seed: 1001
+  env_config: configs/phase1_horseshoe.yaml
+  output_dir: results/phase3b_aurora_one_retrain_normalized_seed_1001
+  production_protocol: configs/production_protocol.yaml
+  plot_title: Phase 3B one-retrain normalized learned-BD baseline
+
+algorithm:
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: euclidean_grid_in_2d_latent_space
+  grid_bins: [25, 25]
+  hidden_dim: 16
+  total_evaluations: 20000
+  bootstrap_evaluations: 2000
+  retrain_evaluations: [10000]
+  init_scale: 0.7
+  mutation_sigma: 0.18
+  mutation_probability: 0.10
+  log_interval: 100
+
+trajectory:
+  sequence_length: 64
+  features: [x, y, vx, vy, energy]
+
+autoencoder:
+  latent_dim: 2
+  epochs: 80
+  batch_size: 128
+  learning_rate: 0.001
+  validation_fraction: 0.15
+  device: auto
+  latent_bounds_padding_fraction: 0.15
+  normalize: true
+  derivative_loss_weight: 0.5
+
+metrics:
+  qd_score_fitness_floor: -5.0
+  qd_score_definition: shifted_qd_score = sum(max(raw_fitness - qd_score_fitness_floor, 0)) over occupied archive cells
+  raw_qd_score_definition: raw_qd_score = sum(raw_fitness) over occupied archive cells
+  occupancy_entropy_definition: log(filled_cells) / log(total_archive_cells); coverage-derived only
+  pairwise_geodesic_k: 20
+  pairwise_log_interval: 1000
+
+autoencoder_sanity:
+  enabled: false

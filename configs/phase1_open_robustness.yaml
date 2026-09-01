@@ -1,0 +1,98 @@
+experiment:
+  name: phase1_open_robustness
+  description: Secondary, more open map reserved for later robustness checks.
+  base_seed: 2718
+  seed_policy: Use base_seed for deterministic validation. For batches, derived_seed = base_seed + policy_index * 1009 + replicate_index.
+
+episode:
+  max_steps: 280
+  dt: 0.08
+
+agent:
+  radius: 0.025
+  start_position: [-0.72, -0.72]
+  start_heading: 0.35
+  start_jitter: 0.015
+  initial_energy: 1.0
+  max_energy: 1.25
+  max_speed: 0.82
+  turn_rate: 5.2
+  thrust_accel: 1.9
+  linear_drag: 0.985
+  brake_drag: 0.72
+
+fitness:
+  alive_reward: 0.008
+  food_reward_scale: 1.0
+  energy_decay: 0.0062
+  movement_energy_cost: 0.0015
+  wall_collision_penalty: 0.035
+  hazard_penalty_scale: 1.0
+  exploration_cell_size: 0.10
+  exploration_reward: 0.045
+
+observation:
+  ray_count: 8
+  ray_range: 0.52
+  ray_steps: 14
+
+map:
+  name: open_robustness
+  world_min: [-1.0, -1.0]
+  world_max: [1.0, 1.0]
+  walls:
+    - name: low_center_block
+      x_min: -0.12
+      y_min: -0.42
+      x_max: 0.12
+      y_max: -0.32
+    - name: upper_right_block
+      x_min: 0.42
+      y_min: 0.24
+      x_max: 0.64
+      y_max: 0.34
+    - name: upper_left_block
+      x_min: -0.68
+      y_min: 0.18
+      x_max: -0.44
+      y_max: 0.28
+  foods:
+    - name: start_patch
+      position: [-0.66, -0.48]
+      radius: 0.055
+      reward: 2.4
+      energy_gain: 0.28
+      respawn_steps: 90
+    - name: center_patch
+      position: [0.00, 0.06]
+      radius: 0.055
+      reward: 3.2
+      energy_gain: 0.35
+      respawn_steps: 100
+    - name: right_patch
+      position: [0.72, -0.56]
+      radius: 0.055
+      reward: 3.6
+      energy_gain: 0.36
+      respawn_steps: 95
+    - name: upper_left_patch
+      position: [-0.72, 0.62]
+      radius: 0.055
+      reward: 3.0
+      energy_gain: 0.34
+      respawn_steps: 95
+  hazards:
+    - name: center_hazard
+      position: [0.26, -0.02]
+      radius: 0.080
+      penalty: 0.10
+      energy_drain: 0.017
+  diagnostic_pairs: []
+
+shortest_path:
+  grid_size: 140
+  connectivity: 8
+
+validation:
+  random_policy_count: 80
+  speed_benchmark_evaluations: 500

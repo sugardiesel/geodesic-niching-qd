@@ -1,0 +1,120 @@
+{
+  "config": "results\\phase6_open_robustness\\configs\\baseline_b_learned_bd_euclidean_seed_1003.yaml",
+  "env_config": "configs/phase1_open_robustness.yaml",
+  "seed": 1003,
+  "descriptor": "learned_trajectory_autoencoder_latent",
+  "archive_assignment": "euclidean_grid_in_2d_latent_space",
+  "grid_bins": [
+    25,
+    25
+  ],
+  "hidden_dim": 16,
+  "policy_parameter_count": 355,
+  "total_evaluations": 20000,
+  "bootstrap_evaluations": 2000,
+  "retrain_evaluations": [
+    10000
+  ],
+  "autoencoder_device": "cuda",
+  "autoencoder_latent_dim": 2,
+  "autoencoder_normalize": true,
+  "autoencoder_derivative_loss_weight": 0.5,
+  "autoencoder_loss_note": "validation loss is MSE in the autoencoder training space; trajectory features are normalized before training; training loss adds derivative MSE with weight 0.5",
+  "autoencoder_final_train_loss": 0.6182894408282111,
+  "autoencoder_final_validation_loss": 0.597370982170105,
+  "elapsed_seconds": 923.9582299000003,
+  "evaluations_per_second": 21.646000168389207,
+  "final_metrics": {
+    "filled_cells": 285,
+    "coverage": 0.456,
+    "qd_score": 7010.135999999991,
+    "raw_qd_score": 5585.135999999991,
+    "qd_score_fitness_floor": -5.0,
+    "max_fitness": 34.67999999999999,
+    "mean_fitness": 19.5969684210526,
+    "occupancy_entropy": 0.878022248730284,
+    "mean_pairwise_descriptor_euclidean": 20.146506431715135,
+    "mean_pairwise_descriptor_knn_geodesic": 20.327294894066917,
+    "pairwise_geodesic_k": 20,
+    "pairwise_geodesic_finite_fraction": 1.0,
+    "pairwise_geodesic_disconnected_pairs": 0
+  },
+  "trajectory_diagnostics": {
+    "loop_definition": "path_length >= 1.0 and total_abs_turn/(2*pi) >= 1.0 and bbox_area >= 0.02",
+    "near_still_definition": "path_length <= 0.20 and displacement <= 0.10",
+    "bootstrap_count": 2000,
+    "bootstrap_loop_count": 666,
+    "bootstrap_loop_fraction": 0.333,
+    "bootstrap_near_still_count": 930,
+    "bootstrap_near_still_fraction": 0.465,
+    "later_count": 18000,
+    "later_loop_count": 16668,
+    "later_loop_fraction": 0.926,
+    "later_near_still_count": 38,
+    "later_near_still_fraction": 0.002111111111111111,
+    "max_loop_score": 19.739993468686105,
+    "median_path_length": 7.490401268005371
+  },
+  "latent_clipping": {
+    "overall_clipped_count": 63,
+    "overall_clipped_fraction": 0.00315,
+    "post_bootstrap_clipped_count": 63,
+    "post_bootstrap_clipped_fraction": 0.0035
+  },
+  "reconstruction_quality": {
+    "overall_mse": 0.10702268034219742,
+    "overall_xy_mse": 0.14177119731903076,
+    "loop_count": 17334,
+    "loop_mse": 0.11988417059183121,
+    "loop_xy_mse": 0.15660832822322845,
+    "near_still_count": 968,
+    "near_still_mse": 0.0005812887102365494,
+    "near_still_xy_mse": 0.0013020036276429892
+  },
+  "latent_dim_sanity": [],
+  "retrain_events": [
+    {
+      "evaluation": 10000,
+      "train_loss": 0.6182894408282111,
+      "validation_loss": 0.597370982170105,
+      "candidate_count": 10000,
+      "rebuilt_archive_filled_cells": 229,
+      "rebuilt_clip_fraction": 0.0
+    }
+  ],
+  "representative_sample": {
+    "enabled": true,
+    "sample_count": 400,
+    "evaluation_min": 23,
+    "evaluation_max": 19968,
+    "loop_fraction": 0.8825,
+    "near_still_fraction": 0.035,
+    "mean_pairwise_latent_euclidean": 10.591552001009429,
+    "median_pairwise_latent_euclidean": 8.555875943925184,
+    "max_pairwise_latent_euclidean": 39.83002142302782
+  },
+  "output_files": [
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\archive_cells.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\metrics.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\evaluations.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\autoencoder_loss.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\latent_dim_sanity.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\autoencoder_final.pt",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\representative_trajectory_sample.npz",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\representative_trajectory_sample.csv",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\autoencoder_loss.png",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\autoencoder_loss.pdf",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\trajectory_reconstruction_examples.png",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\trajectory_reconstruction_examples.pdf",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\archive_heatmap_learned_latent.png",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\archive_heatmap_learned_latent.pdf",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\qd_score_coverage_curves.png",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\qd_score_coverage_curves.pdf",
+    "results\\phase6_open_robustness\\baseline_b_learned_bd_euclidean\\seed_1003\\phase3_summary.json"
+  ],
+  "pairwise_reporting_metric_recomputed_posthoc": {
+    "k": 20,
+    "source": "final archive_cells.csv descriptors",
+    "reason": "Shared post-audit reporting convention across all conditions."
+  }
+}

@@ -1,0 +1,46 @@
+production_budget:
+  total_evaluations_per_seed: 20000
+  seeds: [1001, 1002, 1003]
+  conditions:
+    - baseline_a_handcrafted_map_elites
+    - baseline_b_learned_bd_euclidean
+    - contribution_geodesic_niching
+  fairness_rule: Same number of environment evaluations per seed per condition; reduced to 3 seeds because this is a Phase 6 robustness check rather than the headline Phase 5 sweep.
+  estimated_total_environment_evaluations: 180000
+
+experiment_name_prefix: phase6_open_robustness
+env_config_override: configs/phase1_open_robustness.yaml
+
+phase6_note: >
+  Robustness check on the secondary open map. Uses the same locked 20,000-evaluation budget,
+  one-retrain learned descriptor design, k=20 pairwise/reporting metric, and k=20 geodesic graph
+  assignment settings as the Phase 5 horseshoe-map production sweep, but runs 3 seeds per condition.
+
+baseline_b_locked_design:
+  config: configs/phase3_aurora_euclidean.yaml
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: euclidean_grid_in_2d_latent_space
+  trajectory_normalization: true
+  autoencoder_latent_dim: 2
+  derivative_loss_weight: 0.5
+  bootstrap_evaluations: 2000
+  retrain_evaluations: [10000]
+
+phase4_geodesic_design:
+  config: configs/phase4_geodesic_niching.yaml
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: approximate_geodesic_nearest_centroid_in_2d_latent_space
+  graph_k: 20
+  assignment_k: 20
+  rolling_buffer_size: 1000
+  graph_refresh_interval: 250
+  reservoir_strategy: rolling_recent_buffer
+  include_archive_elites_in_support: false
+
+metrics:
+  qd_score_fitness_floor: -5.0
+  qd_score_definition: shifted_qd_score = sum(max(raw_fitness - qd_score_fitness_floor, 0)) over occupied archive cells
+  raw_qd_score_definition: raw_qd_score = sum(raw_fitness) over occupied archive cells
+  occupancy_entropy_definition: log(filled_cells) / log(total_archive_cells); coverage-derived only
+  pairwise_geodesic_k: 20
+  pairwise_log_interval: 1000

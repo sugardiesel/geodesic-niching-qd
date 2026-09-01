@@ -1,0 +1,44 @@
+production_budget:
+  total_evaluations_per_seed: 20000
+  seeds: [1001, 1002, 1003, 1004, 1005]
+  conditions:
+    - baseline_a_handcrafted_map_elites
+    - baseline_b_learned_bd_euclidean
+    - contribution_geodesic_niching
+  fairness_rule: Same number of environment evaluations per seed per condition. Extra autoencoder or graph computation is logged separately as method overhead.
+  estimated_total_environment_evaluations: 300000
+  estimated_raw_eval_hours_at_19_14_eval_s: 4.35
+  conservative_total_wall_clock_hours: 8.0
+
+baseline_b_locked_design:
+  config: configs/phase3_aurora_euclidean.yaml
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: euclidean_grid_in_2d_latent_space
+  trajectory_normalization: true
+  autoencoder_latent_dim: 2
+  derivative_loss_weight: 0.5
+  bootstrap_evaluations: 2000
+  retrain_evaluations: [10000]
+  note: Frozen normalized encoder is kept as an ablation in configs/phase3b_aurora_frozen_normalized.yaml.
+
+phase4_geodesic_design:
+  config: configs/phase4_geodesic_niching.yaml
+  descriptor: learned_trajectory_autoencoder_latent
+  archive_assignment: approximate_geodesic_nearest_centroid_in_2d_latent_space
+  graph_k: 20
+  assignment_k: 20
+  rolling_buffer_size: 1000
+  graph_refresh_interval: 250
+  parent_selection: geodesic_novelty_weighted_elite_sampling
+  reservoir_strategy: rolling_recent_buffer
+  include_archive_elites_in_support: false
+  connectivity_safeguard: infinite shortest-path distances are replaced by 2x the larger of the largest positive finite graph distance and the support-set Euclidean diameter observed at refresh time
+  note: Authoritative corrected production result uses endpoint-only centroids plus the most recent 1,000 visited latent points at k=20. This is the completed 8-run result set, not a claim that k=20 solves connectivity; later audits found persistent centroid starvation. Elite retention is diagnostic-only and remains disabled.
+
+metrics:
+  qd_score_fitness_floor: -5.0
+  qd_score_definition: shifted_qd_score = sum(max(raw_fitness - qd_score_fitness_floor, 0)) over occupied archive cells
+  raw_qd_score_definition: raw_qd_score = sum(raw_fitness) over occupied archive cells
+  occupancy_entropy_definition: log(filled_cells) / log(total_archive_cells); coverage-derived only
+  pairwise_geodesic_k: 20
+  pairwise_log_interval: 1000

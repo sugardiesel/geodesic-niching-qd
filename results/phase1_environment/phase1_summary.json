@@ -1,0 +1,143 @@
+{
+  "config": "configs\\phase1_horseshoe.yaml",
+  "map": "horseshoe_u_corridor",
+  "base_seed": 1729,
+  "seed_policy": "Use base_seed for deterministic validation. For batches, derived_seed = base_seed + policy_index * 1009 + replicate_index.",
+  "observation_dim": 18,
+  "random_mlp_hidden_dim": 16,
+  "random_mlp_parameter_count": 355,
+  "demo_rollouts": [
+    {
+      "name": "stay_still",
+      "fitness": 1.296000000000001,
+      "steps": 162,
+      "food_collected": 0,
+      "hazard_contacts": 0,
+      "wall_collisions": 0,
+      "final_position": [
+        -0.754077739111845,
+        -0.7699462756070516
+      ],
+      "termination": "energy_depleted"
+    },
+    {
+      "name": "random_action",
+      "fitness": 1.0500000000000007,
+      "steps": 160,
+      "food_collected": 0,
+      "hazard_contacts": 0,
+      "wall_collisions": 13,
+      "final_position": [
+        -0.9006725866444267,
+        -0.47601405918297957
+      ],
+      "termination": "energy_depleted"
+    },
+    {
+      "name": "seek_nearest_food",
+      "fitness": -1.7470000000000012,
+      "steps": 201,
+      "food_collected": 1,
+      "hazard_contacts": 0,
+      "wall_collisions": 176,
+      "final_position": [
+        -0.2751361256349222,
+        -0.4793138562100127
+      ],
+      "termination": "energy_depleted"
+    },
+    {
+      "name": "safe_corner",
+      "fitness": 1.378000000000001,
+      "steps": 161,
+      "food_collected": 0,
+      "hazard_contacts": 0,
+      "wall_collisions": 0,
+      "final_position": [
+        -0.8799609052451771,
+        -0.860343574521332
+      ],
+      "termination": "energy_depleted"
+    },
+    {
+      "name": "inside_horseshoe_route",
+      "fitness": 23.05999999999983,
+      "steps": 280,
+      "food_collected": 3,
+      "hazard_contacts": 0,
+      "wall_collisions": 9,
+      "final_position": [
+        -0.00034446006958564583,
+        -0.48970904143310673
+      ],
+      "termination": "max_steps"
+    },
+    {
+      "name": "right_field_route",
+      "fitness": 7.271,
+      "steps": 202,
+      "food_collected": 1,
+      "hazard_contacts": 0,
+      "wall_collisions": 3,
+      "final_position": [
+        0.7797981438567669,
+        -0.4997158890483619
+      ],
+      "termination": "energy_depleted"
+    }
+  ],
+  "degenerate_policy_check": {
+    "status": "pass",
+    "passed": true,
+    "stay_still_fitness": 1.296000000000001,
+    "safe_corner_fitness": 1.378000000000001,
+    "best_active_fitness": 23.05999999999983,
+    "margin_best_active_minus_degenerate": 21.68199999999983
+  },
+  "speed_benchmark": {
+    "evaluations": 500,
+    "elapsed_seconds": 22.63252150000335,
+    "evaluations_per_second": 22.092103171090592,
+    "mean_fitness": 1.7754239999999994,
+    "std_fitness": 2.057774639804852,
+    "mean_food_collected": 0.182
+  },
+  "phase1_5_distance_diagnostic": {
+    "rollouts": 92,
+    "pair_count": 4186,
+    "pearson_correlation": 0.814461465531535,
+    "horseshoe_region_pair_count": 1314,
+    "open_field_pair_count": 2872,
+    "horseshoe_region_pearson_correlation": 0.4723962242386472,
+    "open_field_pearson_correlation": 0.9986711109086749,
+    "median_geodesic_to_euclidean_ratio": 1.0665366313712905,
+    "p95_geodesic_to_euclidean_ratio": 3.2934013644256224,
+    "max_geodesic_to_euclidean_ratio": 13.246413217107829,
+    "detour_pair_count_ratio_gt_3": 233,
+    "detour_pair_count_ratio_gt_5": 37
+  },
+  "landmark_diagnostic_pairs": [
+    {
+      "name": "u_wall_detour",
+      "euclidean": 0.18,
+      "geodesic": 2.403900256285828,
+      "geodesic_to_euclidean_ratio": 13.355001423810155
+    },
+    {
+      "name": "u_bottom_detour",
+      "euclidean": 0.19999999999999996,
+      "geodesic": 2.8951540062675667,
+      "geodesic_to_euclidean_ratio": 14.475770031337836
+    }
+  ],
+  "output_files": [
+    "results\\phase1_environment\\phase1_rollout_demo.png",
+    "results\\phase1_environment\\phase1_rollout_demo.pdf",
+    "results\\phase1_environment\\phase1_euclidean_vs_geodesic_scatter.png",
+    "results\\phase1_environment\\phase1_euclidean_vs_geodesic_scatter.pdf",
+    "results\\phase1_environment\\phase1_report_euclidean_vs_geodesic_by_region.png",
+    "results\\phase1_environment\\phase1_report_euclidean_vs_geodesic_by_region.pdf",
+    "results\\phase1_environment\\phase1_euclidean_vs_geodesic_pairs.csv",
+    "results\\phase1_environment\\phase1_summary.json"
+  ]
+}

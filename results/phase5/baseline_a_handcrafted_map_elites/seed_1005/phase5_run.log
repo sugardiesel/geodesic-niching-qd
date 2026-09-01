@@ -1,0 +1,19 @@
+PHASE 2 HAND-CRAFTED MAP-ELITES SUMMARY
+config: results\phase5\configs\baseline_a_handcrafted_map_elites_seed_1005.yaml
+env_config: configs/phase1_horseshoe.yaml
+seed: 1005
+descriptor: final_xy
+grid_bins: [25, 25]
+parameter_count: 355
+runtime: 20000 evals in 1047.111s = 19.10 eval/s
+final archive: filled=614, coverage=98.240%, QD-score=17781.470, max fitness=37.295, mean fitness=23.960
+occupancy entropy (coverage-derived): 0.997
+output files:
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\archive_cells.csv
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\metrics.csv
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\evaluations.csv
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\archive_heatmap_final_xy.png
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\archive_heatmap_final_xy.pdf
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\qd_score_coverage_curves.png
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\qd_score_coverage_curves.pdf
+  results\phase5\baseline_a_handcrafted_map_elites\seed_1005\phase2_summary.json

@@ -1,0 +1,42 @@
+{
+  "config": "configs\\phase2_handcrafted_map_elites.yaml",
+  "env_config": "configs/phase1_horseshoe.yaml",
+  "seed": 4242,
+  "descriptor": "final_xy",
+  "grid_bins": [
+    25,
+    25
+  ],
+  "hidden_dim": 16,
+  "parameter_count": 355,
+  "total_evaluations": 2000,
+  "initial_random": 300,
+  "elapsed_seconds": 98.20585970000002,
+  "evaluations_per_second": 20.365383553584426,
+  "final_metrics": {
+    "filled_cells": 443,
+    "coverage": 0.7088,
+    "qd_score": 5689.307999999991,
+    "raw_qd_score": 3474.30799999999,
+    "qd_score_fitness_floor": -5.0,
+    "max_fitness": 20.849999999999923,
+    "mean_fitness": 7.842681715575599,
+    "occupancy_entropy": 0.9465369435763559,
+    "mean_pairwise_descriptor_euclidean": 1.0623907212459012,
+    "mean_pairwise_descriptor_knn_geodesic": 1.1172380495710885,
+    "pairwise_geodesic_k": 10,
+    "pairwise_geodesic_finite_fraction": 1.0,
+    "pairwise_geodesic_disconnected_pairs": 0
+  },
+  "occupancy_entropy": 0.9465369435763559,
+  "output_files": [
+    "results\\phase2_handcrafted_map_elites\\archive_cells.csv",
+    "results\\phase2_handcrafted_map_elites\\metrics.csv",
+    "results\\phase2_handcrafted_map_elites\\evaluations.csv",
+    "results\\phase2_handcrafted_map_elites\\archive_heatmap_final_xy.png",
+    "results\\phase2_handcrafted_map_elites\\archive_heatmap_final_xy.pdf",
+    "results\\phase2_handcrafted_map_elites\\qd_score_coverage_curves.png",
+    "results\\phase2_handcrafted_map_elites\\qd_score_coverage_curves.pdf",
+    "results\\phase2_handcrafted_map_elites\\phase2_summary.json"
+  ]
+}
