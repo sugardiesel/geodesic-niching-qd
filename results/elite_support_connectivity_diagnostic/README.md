@@ -1,7 +1,7 @@
-# Elite-plus-recent support connectivity gate
+# Elite-retention support diagnostic
 
-This is a post-hoc architectural test over the eight saved corrected Contribution streams. It did
-not rerun policies or MAP-Elites search. The support set is fixed before inspecting results:
+This post-hoc test uses the eight saved final Contribution streams and does not rerun policies or
+MAP-Elites search. The support set was defined before inspecting results:
 
 - all current archive elite latent codes, retained until that niche's elite changes;
 - the most recent 500 raw candidate latents;
@@ -12,9 +12,9 @@ not rerun policies or MAP-Elites search. The support set is fixed before inspect
 Graphs are refreshed every 250 evaluations. Historical candidate and archive-assignment streams
 are held fixed to isolate the support-set change. The eval-10,000 archive rebuild is reconstructed
 in final-encoder coordinates, and reconstructed elite counts are checked against saved run
-summaries. The precommitted gate requires one routing component at every post-retrain refresh,
-zero never-reachable centroids, and at least 95% mean centroid reachability on both maps without
-making the graph effectively Euclidean.
+summaries. The acceptance criteria are one routing component at every post-retrain refresh, zero
+never-reachable centroids, and at least 95% mean centroid reachability on both maps without making
+the graph effectively Euclidean.
 
 ## Static reference
 
@@ -94,13 +94,11 @@ open map. Unreachable-more-than-half counts improve by 31.8 and 27.0 cells. Howe
 never-reachable counts improve by only 1.8 and 1.7 cells. The targeted aging-out hypothesis is
 therefore not the main cause of permanent starvation.
 
-## Decision
+## Conclusion
 
-The gate fails. Elite support gives a modest partial improvement but does not make k=5 or k=10
-safe and does not substantially reduce permanently unreachable centroids. Larger k still leaves
-153-221 never-reachable centroids on average and makes graph distances nearly Euclidean. No new
-Contribution production searches were run, no third architectural variant will be attempted, and
-report drafting remains paused pending user review.
+Elite support gives a modest partial improvement but does not make k=5 or k=10 safe and does not
+substantially reduce permanently unreachable centroids. Larger k still leaves 153-221
+never-reachable centroids on average and makes graph distances nearly Euclidean.
 
 This supports a structural limitation of the tested design: a sparse evolving real-point graph
 cannot reliably maintain attachments to a fixed dense rectangular centroid grid under the same

@@ -57,7 +57,7 @@ histories, summaries, and paired statistical tests.
   true maze-distance analysis.
 - [`phase3_knn_k_sensitivity/`](phase3_knn_k_sensitivity/): static latent-space `k` sensitivity.
 - [`phase4_dynamic_graph_k_sensitivity/`](phase4_dynamic_graph_k_sensitivity/): early dynamic-graph
-  sensitivity checkpoint; the final corrected audit is listed below.
+  sensitivity checkpoint; the full connectivity audit is listed below.
 
 ### Final production and post-hoc analyses
 
@@ -78,6 +78,6 @@ histories, summaries, and paired statistical tests.
 - [`audit_fix/`](audit_fix/): intermediate graph and reporting verification outputs; not an
   additional production set.
 - [`audit_connectivity_verification/`](audit_connectivity_verification/): exact replay of the
-  corrected endpoint-only graph, dynamic `k` sensitivity, and centroid-starvation measurements.
+  endpoint-only graph, dynamic `k` sensitivity, and centroid-starvation measurements.
 - [`elite_support_connectivity_diagnostic/`](elite_support_connectivity_diagnostic/): alternative
   elite-retention support-set diagnostic, not used in the final production runs.

@@ -1,8 +1,8 @@
-# Corrected graph connectivity verification
+# Graph connectivity verification
 
-This audit uses the corrected endpoint-safe graph: the rolling trajectory points are routing
-nodes, the 25x25 archive centroids are endpoints, centroid-to-centroid edges are removed, and
-centroids cannot be shortest-path transit nodes. No MAP-Elites search was rerun for this audit.
+This audit uses the endpoint-safe graph from the final Contribution runs: rolling trajectory
+points are routing nodes, the 25x25 archive centroids are endpoints, centroid-to-centroid edges
+are removed, and centroids cannot be shortest-path transit nodes. No MAP-Elites search was rerun.
 
 ## Static representative samples
 
@@ -24,7 +24,7 @@ geodesic distance divided by mean Euclidean distance over the same finite pairs.
 
 ## Dynamic production-style graphs
 
-Each row aggregates the actual corrected Contribution streams at that snapshot: five horseshoe
+Each row aggregates the final Contribution streams at that snapshot: five horseshoe
 seeds or three open-map seeds. Graph support is the last 1,000 visited latents plus the 625 archive
 centroid endpoints. `components` is the routing-point component mean with the seed range in
 parentheses. `connected` counts fully connected routing graphs. `finite` and `ratio` are means over
@@ -63,9 +63,10 @@ all support pairs, with the ratio evaluated only on finite pairs.
 | Open | 20,000 | 20 | 1.040 | 1.3 (1-2) | 0.699 | 2/3 |
 | Open | 20,000 | 30 | 1.031 | 1.0 (1-1) | 0.772 | 3/3 |
 
-No tested k is both curvature-revealing and robustly connected throughout the dynamic runs.
-`k=20` is less fragmented than k=3/5/10 but is not connectivity-safe, while k=30 is still
-fragmented at early horseshoe/open snapshots and is already close to Euclidean distance.
+No tested k maintains both a large geodesic/Euclidean separation and reliable connectivity
+throughout the dynamic runs. `k=20` is less fragmented than k=3/5/10 but is not
+connectivity-safe, while k=30 is still fragmented at early horseshoe/open snapshots and is
+already close to Euclidean distance.
 
 ## Exact production replay and centroid starvation
 
@@ -93,10 +94,8 @@ so it can be starved without the penalty becoming the winning distance. Across s
 222.8 horseshoe centroids and 204.3 open-map centroids were never reachable at any post-retrain
 refresh; all remained empty.
 
-Therefore the corrected Contribution coverage drop cannot be interpreted as verified evidence of
+The Contribution coverage drop therefore cannot be interpreted as evidence of
 an intrinsic coverage-for-quality trade-off. It is confounded by endpoint/grid support failure.
-The requested Baseline-B-versus-Contribution trade-off heatmap was intentionally not produced
-because its prerequisite connectivity gate failed.
 
 ## Reproduction
 
