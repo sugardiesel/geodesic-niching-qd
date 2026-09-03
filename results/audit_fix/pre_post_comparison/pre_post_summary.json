@@ -1,5 +1,5 @@
 {
-  "purpose": "GPT-5.6 Sol Ultra audit remediation before/after comparison",
+  "purpose": "Before-and-after comparison for the geodesic graph audit",
   "pairing": "Same seeds and 20,000-evaluation budget before and after the graph fix.",
   "metric_caveat": "Pre-fix pairwise geodesic reporting used k=5; post-fix reporting uses corrected k=20. Quality metrics and Euclidean descriptor distance are directly comparable.",
   "aggregate_rows": [

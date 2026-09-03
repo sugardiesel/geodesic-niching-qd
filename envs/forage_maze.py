@@ -1,7 +1,7 @@
 """ForageMaze2D: a small original artificial-life environment.
 
-The environment is intentionally lightweight and dependency-poor: Phase 1 can run with only
-NumPy, while later phases can add plotting or learning libraries on top.
+The simulation depends only on NumPy; plotting and representation-learning components remain
+outside the environment.
 """
 
 from __future__ import annotations

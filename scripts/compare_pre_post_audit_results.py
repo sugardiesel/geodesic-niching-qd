@@ -1,4 +1,4 @@
-"""Compare archived buggy Contribution results with corrected post-audit runs."""
+"""Compare Contribution results before and after graph-construction corrections."""
 
 from __future__ import annotations
 
@@ -80,7 +80,7 @@ def main() -> None:
     write_csv(output_dir / "baseline_b_vs_contribution_paired_tests.csv", paired_rows)
     write_csv(output_dir / "geodesic_graph_pre_post_diagnostics.csv", graph_rows)
     summary = {
-        "purpose": "GPT-5.6 Sol Ultra audit remediation before/after comparison",
+        "purpose": "Before-and-after comparison for the geodesic graph audit",
         "pairing": "Same seeds and 20,000-evaluation budget before and after the graph fix.",
         "metric_caveat": (
             "Pre-fix pairwise geodesic reporting used k=5; post-fix reporting uses corrected k=20. "

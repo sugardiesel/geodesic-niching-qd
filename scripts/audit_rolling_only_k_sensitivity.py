@@ -1,5 +1,5 @@
 # ruff: noqa: I001
-"""Recompute full-refresh k sensitivity for the locked rolling-only graph support."""
+"""Recompute full-refresh k sensitivity for rolling-only graph support."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Build the report-ready horseshoe detour figure from authoritative project artifacts."""
+"""Build the horseshoe detour figure from validated config and diagnostic outputs."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ def generate_horseshoe_detour_artifacts(
     provenance_path: str | Path,
     pair_name: str = "u_bottom_detour",
 ) -> dict[str, Any]:
-    """Generate the figure and a traceable old-versus-corrected provenance row."""
+    """Generate the figure and its legacy-versus-corrected provenance row."""
     config_path = Path(config_path)
     legacy_summary_path = Path(legacy_summary_path)
     corrected_summary_path = Path(corrected_summary_path)

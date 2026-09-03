@@ -1,5 +1,5 @@
 # ruff: noqa: E402,I001
-"""Build compact figures from the authoritative rolling-only diagnostics."""
+"""Build compact figures from the final rolling-only connectivity diagnostics."""
 
 from __future__ import annotations
 
@@ -116,7 +116,7 @@ def main() -> None:
     if horizontal:
         fig, axes = plt.subplots(1, 2, figsize=(3.35, 1.10), sharex=True)
     else:
-        # Keep the single-column width and label sizes fixed while reducing vertical space.
+        # Fixed canvas dimensions preserve legibility at single-column width.
         fig, axes = plt.subplots(2, 1, figsize=(3.35, 3.10), sharex=True)
 
     for map_name in MAPS:

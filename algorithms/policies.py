@@ -1,4 +1,4 @@
-"""Small policies used for Phase 1 validation and later QD experiments."""
+"""Small neural and hand-coded policies for environment validation and QD experiments."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ def angle_wrap(angle: float) -> float:
 
 
 class RandomMLPPolicy:
-    """Tiny tanh MLP policy, kept under 1k parameters for MAP-Elites later."""
+    """Compact tanh MLP policy with fewer than 1,000 parameters."""
 
     def __init__(self, w1: np.ndarray, b1: np.ndarray, w2: np.ndarray, b2: np.ndarray):
         self.w1 = w1
@@ -120,7 +120,7 @@ class MLPPolicyGenome:
 
 
 class RandomActionPolicy:
-    """Temporally correlated random action policy for smoke-test rollouts."""
+    """Temporally correlated random actions for environment validation."""
 
     def __init__(self, seed: int, persistence: float = 0.88):
         self.rng = np.random.default_rng(seed)

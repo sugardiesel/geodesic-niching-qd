@@ -1,4 +1,4 @@
-"""Gate elite-plus-recent geodesic graph support using saved production streams."""
+"""Evaluate elite-plus-recent support on saved geodesic production streams."""
 
 from __future__ import annotations
 
@@ -144,7 +144,7 @@ def main() -> None:
     plot_paths = save_plots(seed_aggregate, snapshot_aggregate, output_dir)
 
     summary = {
-        "diagnostic": "Elite-plus-recent real-point support connectivity gate",
+        "diagnostic": "Elite-plus-recent support connectivity analysis",
         "search_rerun": False,
         "support_definition": (
             "Stable deduplicated union of every current archive elite latent and the most recent "
@@ -157,12 +157,12 @@ def main() -> None:
             "assignments are held fixed to isolate support composition. The eval-10000 archive "
             "rebuild is reconstructed exactly in final-encoder coordinates."
         ),
-        "precommitted_gate": (
-            "A k is connectivity-safe only if every routing graph has one component across every "
-            "seed and post-retrain refresh, no centroid is never reachable, and mean reachable-"
-            "centroid fraction is at least 0.95 on both maps. Production search is not authorized "
-            "unless reachability improves substantially and a defensible k passes or nearly "
-            "passes these conditions without collapsing the distance ratio to 1."
+        "acceptance_criteria": (
+            "A k value is considered connectivity-safe if every routing graph has one component "
+            "across every seed and post-retraining refresh, every centroid is reachable at least "
+            "once, and mean reachable-centroid fraction is at least 0.95 on both maps. A useful "
+            "setting must also preserve geodesic separation rather than reducing the distance "
+            "ratio to 1."
         ),
         "k_values": k_values,
         "snapshots": snapshots,

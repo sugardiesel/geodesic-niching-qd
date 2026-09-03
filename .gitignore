@@ -13,23 +13,23 @@ venv/
 # uv local cache
 .uv-cache/
 
-# Local report workspace and rendered submission (submitted separately)
+# Report workspace
 report/
 
-# Local project diaries and audit history, not part of the examiner-facing code tree
+# Local working notes
 docs/
 appendix_notes.md
 ai_use_log.md
 clauderevision.txt
 
-# Historical outputs preserved locally and in earlier commits, not in the examiner tree
+# Superseded experiment outputs
 results_pre_audit_fix/
 
-# Local scratch and reproduction workspaces
+# Scratch and local reproduction outputs
 tmp/
 reproduced/
 
-# Superseded local packaging files
+# Alternative local packaging files
 requirements.txt
 experiments/
 

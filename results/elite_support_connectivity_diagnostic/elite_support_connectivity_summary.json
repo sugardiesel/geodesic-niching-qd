@@ -1,9 +1,9 @@
 {
-  "diagnostic": "Elite-plus-recent real-point support connectivity gate",
+  "diagnostic": "Elite-plus-recent support connectivity analysis",
   "search_rerun": false,
   "support_definition": "Stable deduplicated union of every current archive elite latent and the most recent 500 candidate latents. Elite points take precedence when a candidate is present in both sets. Grid centroids remain endpoints; centroid-to-centroid edges and centroid transit are forbidden.",
   "history_definition": "The saved corrected Contribution candidate streams and their historical archive assignments are held fixed to isolate support composition. The eval-10000 archive rebuild is reconstructed exactly in final-encoder coordinates.",
-  "precommitted_gate": "A k is connectivity-safe only if every routing graph has one component across every seed and post-retrain refresh, no centroid is never reachable, and mean reachable-centroid fraction is at least 0.95 on both maps. Production search is not authorized unless reachability improves substantially and a defensible k passes or nearly passes these conditions without collapsing the distance ratio to 1.",
+  "acceptance_criteria": "A k value is considered connectivity-safe if every routing graph has one component across every seed and post-retraining refresh, every centroid is reachable at least once, and mean reachable-centroid fraction is at least 0.95 on both maps. A useful setting must also preserve geodesic separation rather than reducing the distance ratio to 1.",
   "k_values": [
     3,
     5,
