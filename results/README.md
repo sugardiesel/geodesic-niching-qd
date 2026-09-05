@@ -81,3 +81,5 @@ histories, summaries, and paired statistical tests.
   endpoint-only graph, dynamic `k` sensitivity, and centroid-starvation measurements.
 - [`elite_support_connectivity_diagnostic/`](elite_support_connectivity_diagnostic/): alternative
   elite-retention support-set diagnostic, not used in the final production runs.
+- [`submission_verification/`](submission_verification/): penalty-counter definitions,
+  final-space elite identities, and historical food-respawn replay checks.

@@ -1,0 +1,44 @@
+Source: algorithms/geodesic_archive.py, lines 463-487.
+The complete function body below is quoted verbatim from the submission source.
+
+    def _apply_disconnection_penalty(
+        self, distances: np.ndarray, support_points: np.ndarray
+    ) -> np.ndarray:
+        finite = np.isfinite(distances)
+        self._raw_finite_centroid_fraction = float(np.mean(finite)) if distances.size else 0.0
+        self._penalized_centroid_distances = int(np.count_nonzero(~finite))
+        if self._penalized_centroid_distances and len(self._routing_support_indices):
+            self._cumulative_penalized_centroid_distances += self._penalized_centroid_distances
+            self._refreshes_with_penalty += 1
+        if self._penalized_centroid_distances == 0:
+            self._penalty_distance = 0.0
+            return distances
+
+        positive_finite = distances[finite & (distances > 0.0)]
+        finite_scale = float(np.max(positive_finite)) if len(positive_finite) else 0.0
+        if len(support_points) >= 2:
+            span = support_points[:, None, :] - support_points[None, :, :]
+            support_scale = float(np.max(np.linalg.norm(span, axis=2)))
+        else:
+            support_scale = 0.5
+        penalty = max(finite_scale, support_scale, 0.5) * 2.0
+        repaired = distances.copy()
+        repaired[~finite] = penalty
+        self._penalty_distance = penalty
+        return repaired
+
+Trace:
+1. refresh_graph builds a graph with real visited nodes followed by centroid endpoints.
+2. endpoint_shortest_path_distances returns shape (number of centroids, total support nodes).
+   The columns include visited nodes AND centroid endpoints.
+3. refresh_graph passes this whole matrix into the function above.
+4. ~finite marks every non-finite matrix entry, including centroid-to-centroid entries.
+5. The current count is added once per nonempty graph refresh. Repeated entries count again.
+6. closest_centroid queries this cached matrix without incrementing the counter.
+7. _update_novelty_scores uses the centroid-to-centroid submatrix of the repaired cache.
+
+Consequently, the 17.1-25.7M count is neither a candidate count nor a winning-assignment
+count. It is a repeated cache-entry count across the final encoder's 41 graph refreshes.
+Separate assignment replay found zero penalized winning routes in 30,000 decisions per
+seed, including the 10,000-candidate retraining rebuild. This does not imply that repaired
+distances had no effect on parent-selection novelty.

@@ -24,6 +24,9 @@ MAP-Elites.
   distance-ratio values for `k in {3,5,10,20,30}`.
 - `data/phase1_horseshoe_u_bottom_detour_provenance.csv`: shortest-path provenance for the
   reported horseshoe landmark pair.
+- [`../phase6_common_behavior_space/`](../phase6_common_behavior_space/): common-space metrics
+  and paired tests after final-encoder elite-identity verification. Its README gives the
+  reproduction commands; the production tables above are unchanged.
 
 Files prefixed by `horseshoe_` and `open_` are unmodified copies of the source aggregate outputs.
 `artifact_manifest.csv` maps packaged artifacts to the original result files or generating code.

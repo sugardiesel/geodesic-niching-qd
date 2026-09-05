@@ -165,10 +165,19 @@ class GeodesicArchiveTests(unittest.TestCase):
         self.assertGreater(stats.penalized_centroid_distances, 0)
         self.assertGreater(stats.penalty_distance, 90.0)
 
+        # Two centroid rows, each with one unreachable visited point and one centroid.
+        self.assertEqual(archive._centroid_distances.shape, (2, 4))
+        self.assertEqual(stats.penalized_centroid_distances, 4)
+        self.assertEqual(stats.cumulative_penalized_centroid_distances, 4)
+
         cell, distance = archive.cell_for(np.array([50.1, 0.0]))
         self.assertEqual(cell, (1, 0))
         self.assertTrue(np.isfinite(distance))
         self.assertGreater(distance, 0.0)
+        self.assertLess(distance, stats.penalty_distance)
+        self.assertEqual(archive.graph_stats().cumulative_penalized_centroid_distances, 4)
+        archive.refresh_graph(force=True)
+        self.assertEqual(archive.graph_stats().cumulative_penalized_centroid_distances, 8)
 
         archive.occupied[0, 0] = True
         archive.occupied[1, 0] = True

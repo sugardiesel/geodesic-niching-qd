@@ -90,9 +90,16 @@ uv run python scripts/run_phase5_sweep.py `
   --no-resume
 ```
 
-These are the expensive commands: together they reproduce 24 searches and can take several
+These are the expensive commands: together they launch 24 searches and can take several
 hours. The committed `results/phase5/` and `results/phase6_open_robustness/` directories contain
 the completed runs used for the final analysis.
+
+Historical replay identified a one-step food-respawn difference between saved production
+trajectories and the current environment. Both checked Baseline B and Contribution policies
+match the historical timing. The commands above use the current corrected environment, so
+they should not be treated as exact historical replay. Post-hoc analysis of committed results
+is unaffected; verified historical replay commands and evidence are in
+`results/submission_verification/README.md`.
 
 Individual methods can also be run directly:
 
@@ -126,10 +133,10 @@ Additional post-hoc analyses, all using completed searches rather than launching
 
 ```powershell
 uv run python scripts/analyze_phase5_geodesic_disagreement.py `
-  --phase5-dir results/phase5 `
+  --phase5-dir results/phase5/contribution_geodesic_niching `
   --output-dir reproduced/disagreement_horseshoe
 uv run python scripts/analyze_phase5_geodesic_disagreement.py `
-  --phase5-dir results/phase6_open_robustness `
+  --phase5-dir results/phase6_open_robustness/contribution_geodesic_niching `
   --output-dir reproduced/disagreement_open
 uv run python scripts/analyze_common_behavior_space.py
 uv run python scripts/audit_geodesic_connectivity_penalty.py
@@ -138,6 +145,20 @@ uv run python scripts/audit_elite_support_connectivity.py
 
 The connectivity audits are post-hoc replays and do not rerun MAP-Elites. See the script help and
 the README files in their result directories for the longer per-seed diagnostic commands.
+
+The original Baseline B sample NPZs and final encoder checkpoints are included. The samples are
+required by the static elite-retention audit. Common-space analysis uses the saved final encoder
+coordinates and recorded archive insertions to recover elite identities. To regenerate the small
+Baseline B identity-verification CSVs from the checkpoints:
+
+```powershell
+uv run python scripts/recover_baseline_elite_latents.py
+uv run python scripts/analyze_common_behavior_space.py
+```
+
+This replays only ambiguous historical policies. It does not run a new search or train an encoder.
+The compatibility environment retains the original food-respawn timing and rejects a replay
+if its logged fitness, episode counters, or trajectory features do not match.
 
 ## Final configuration
 

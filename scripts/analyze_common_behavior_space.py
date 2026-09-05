@@ -137,9 +137,11 @@ def main() -> None:
             "qd_score_floor": QD_SCORE_FLOOR,
         },
         "elite_recovery_note": (
-            "No search was rerun. Final archive rows were matched back to saved evaluation rows by "
-            "fitness, steps, food, wall collisions, and hazard contacts; descriptor closeness was "
-            "used only as a tie-break when available. Ambiguity counts are reported per seed."
+            "No search was rerun. Recovery uses recorded final-stage insertions, fitness and "
+            "episode counters, and descriptors in the final encoder space only. Baseline B "
+            "pre-retraining ties use verified checkpoint replays; Contribution uses its saved "
+            "final-space codes. Unresolved matches raise an error rather than choosing a "
+            "trajectory by closeness in incompatible encoder spaces."
         ),
         "condition_summaries": summary_rows,
         "statistical_tests": test_rows,
@@ -159,7 +161,8 @@ def main() -> None:
 def analyze_seed(map_name: str, condition: str, seed: int, seed_dir: Path) -> dict[str, Any]:
     archive_rows = read_csv(seed_dir / "archive_cells.csv")
     evaluation_rows = read_csv(seed_dir / "evaluations.csv")
-    matched_rows, recovery = recover_elite_evaluation_rows(archive_rows, evaluation_rows)
+    context = recovery_context(seed_dir, evaluation_rows, condition)
+    matched_rows, recovery = recover_elite_evaluation_rows(archive_rows, evaluation_rows, **context)
 
     elite_rows: list[dict[str, Any]] = []
     cell_best: dict[tuple[int, int, int], float] = {}
@@ -235,6 +238,10 @@ def analyze_seed(map_name: str, condition: str, seed: int, seed_dir: Path) -> di
 def recover_elite_evaluation_rows(
     archive_rows: list[dict[str, str]],
     evaluation_rows: list[dict[str, str]],
+    *,
+    final_latents: dict[int, np.ndarray] | None = None,
+    retrain_evaluation: int | None = None,
+    final_insertions: dict[tuple[int, int], int] | None = None,
 ) -> tuple[list[tuple[dict[str, str], dict[str, str], dict[str, Any]]], dict[str, int]]:
     index: dict[tuple[int, int, int, int], list[dict[str, str]]] = {}
     for row in evaluation_rows:
@@ -252,50 +259,107 @@ def recover_elite_evaluation_rows(
                 float(row["fitness"]), float(archive_row["fitness"]), rel_tol=0.0, abs_tol=1e-9
             )
         ]
-        if not candidates:
-            recovery["unmatched"] += 1
-            continue
-        selected = candidates[0]
-        descriptor_distance = float("nan")
-        status = "unique"
-        if len(candidates) > 1:
+        candidate_count = len(candidates)
+        if candidate_count > 1:
             recovery["ambiguous"] += 1
-            status = "ambiguous_selected_by_evaluation_order"
-            if "descriptor_x" in archive_row and "latent_0" in candidates[0]:
-                archive_descriptor = np.asarray(
-                    [float(archive_row["descriptor_x"]), float(archive_row["descriptor_y"])],
-                    dtype=np.float64,
-                )
-                distances = [
-                    float(
-                        np.linalg.norm(
-                            np.asarray(
-                                [float(row["latent_0"]), float(row["latent_1"])], dtype=np.float64
-                            )
-                            - archive_descriptor
-                        )
-                    )
-                    for row in candidates
-                ]
-                best_index = int(np.argmin(distances))
-                selected = candidates[best_index]
-                descriptor_distance = distances[best_index]
-                recovery["descriptor_tiebreaks"] += 1
-                status = "ambiguous_descriptor_tiebreak"
+        cell = (int(archive_row["cell_x"]), int(archive_row["cell_y"]))
+        status = "unique"
+        if final_insertions is not None:
+            recorded = final_insertions.get(cell)
+            if recorded is not None:
+                candidates = [row for row in candidates if int(row["evaluation"]) == recorded]
+                status = "recorded_final_stage_insertion"
             else:
-                selected = sorted(candidates, key=lambda row: int(row["evaluation"]))[-1]
+                candidates = [
+                    row for row in candidates if int(row["evaluation"]) <= int(retrain_evaluation)
+                ]
+                status = "retained_from_retrain"
+        if not candidates:
+            raise ValueError(f"No verified evaluation matches final archive cell {cell}.")
+        descriptor_distance = float("nan")
+        if len(candidates) > 1:
+            codes = final_latents or {}
+            missing = [
+                int(row["evaluation"]) for row in candidates if int(row["evaluation"]) not in codes
+            ]
+            if missing:
+                raise ValueError(
+                    f"Cell {cell} requires final-encoder codes for evaluations {missing}."
+                )
+            archive_descriptor = np.asarray(
+                [float(archive_row["descriptor_x"]), float(archive_row["descriptor_y"])]
+            )
+            distances = [
+                float(np.linalg.norm(codes[int(row["evaluation"])] - archive_descriptor))
+                for row in candidates
+            ]
+            matching = [i for i, distance in enumerate(distances) if distance <= 1e-4]
+            if not matching:
+                raise ValueError(
+                    f"Cell {cell} has no matching final-space descriptor: {distances}."
+                )
+            reference = normalized_features(common_features(candidates[matching[0]]))
+            if any(
+                not np.allclose(
+                    normalized_features(common_features(candidates[i])),
+                    reference,
+                    atol=1e-12,
+                    rtol=0.0,
+                )
+                for i in matching[1:]
+            ):
+                raise ValueError(
+                    f"Cell {cell} has unresolved final-space ties with different behaviors."
+                )
+            selected_index = min(matching, key=lambda i: int(candidates[i]["evaluation"]))
+            selected = candidates[selected_index]
+            descriptor_distance = distances[selected_index]
+            recovery["descriptor_tiebreaks"] += 1
+            status = "verified_final_space_descriptor"
+        else:
+            selected = candidates[0]
         matched.append(
             (
                 archive_row,
                 selected,
                 {
-                    "candidate_count": len(candidates),
+                    "candidate_count": candidate_count,
                     "descriptor_distance": descriptor_distance,
                     "status": status,
                 },
             )
         )
     return matched, recovery
+
+
+def recovery_context(
+    seed_dir: Path, evaluation_rows: list[dict[str, str]], condition: str
+) -> dict[str, Any]:
+    if condition == "contribution_geodesic_niching":
+        rows = read_csv(seed_dir / "visited_latents_final_space.csv")
+        return {
+            "final_latents": {
+                int(row["index"]) + 1: np.asarray([float(row["latent_0"]), float(row["latent_1"])])
+                for row in rows
+            }
+        }
+    summary = json.loads((seed_dir / "phase3_summary.json").read_text(encoding="utf-8"))
+    retrain = max([int(summary["bootstrap_evaluations"]), *summary["retrain_evaluations"]])
+    insertions = {
+        (int(row["cell_x"]), int(row["cell_y"])): int(row["evaluation"])
+        for row in evaluation_rows
+        if int(row["evaluation"]) > retrain and parse_bool(row["inserted"])
+    }
+    path = seed_dir / "recovered_pre_retrain_latents.csv"
+    codes = (
+        {
+            int(row["evaluation"]): np.asarray([float(row["latent_0"]), float(row["latent_1"])])
+            for row in read_csv(path)
+        }
+        if path.exists()
+        else {}
+    )
+    return {"final_latents": codes, "retrain_evaluation": retrain, "final_insertions": insertions}
 
 
 def discrete_key(row: dict[str, str]) -> tuple[int, int, int, int]:

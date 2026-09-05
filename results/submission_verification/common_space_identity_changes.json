@@ -1,0 +1,205 @@
+{
+  "reference_commit": "ab7a6967fedb467aadd544ec4132b9ddc5f74b74",
+  "elite_count": 3694,
+  "changed_identity_count": 22,
+  "changes": [
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "3",
+      "cell_y": "16",
+      "old_evaluation": "3695",
+      "new_evaluation": "4944"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "4",
+      "cell_y": "7",
+      "old_evaluation": "12983",
+      "new_evaluation": "5597"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "10",
+      "cell_y": "18",
+      "old_evaluation": "19318",
+      "new_evaluation": "6653"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1002",
+      "cell_x": "17",
+      "cell_y": "13",
+      "old_evaluation": "18246",
+      "new_evaluation": "2441"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1003",
+      "cell_x": "20",
+      "cell_y": "18",
+      "old_evaluation": "12432",
+      "new_evaluation": "5379"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1003",
+      "cell_x": "21",
+      "cell_y": "17",
+      "old_evaluation": "18122",
+      "new_evaluation": "2993"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1004",
+      "cell_x": "10",
+      "cell_y": "13",
+      "old_evaluation": "17606",
+      "new_evaluation": "1764"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1004",
+      "cell_x": "18",
+      "cell_y": "5",
+      "old_evaluation": "10035",
+      "new_evaluation": "7190"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1002",
+      "cell_x": "9",
+      "cell_y": "9",
+      "old_evaluation": "14908",
+      "new_evaluation": "8102"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1005",
+      "cell_x": "4",
+      "cell_y": "10",
+      "old_evaluation": "16642",
+      "new_evaluation": "7805"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1005",
+      "cell_x": "6",
+      "cell_y": "11",
+      "old_evaluation": "12720",
+      "new_evaluation": "3217"
+    },
+    {
+      "map": "horseshoe",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1005",
+      "cell_x": "12",
+      "cell_y": "17",
+      "old_evaluation": "19912",
+      "new_evaluation": "3386"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "3",
+      "cell_y": "12",
+      "old_evaluation": "12137",
+      "new_evaluation": "7994"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "6",
+      "cell_y": "7",
+      "old_evaluation": "19856",
+      "new_evaluation": "470"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "12",
+      "cell_y": "9",
+      "old_evaluation": "14216",
+      "new_evaluation": "8686"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1001",
+      "cell_x": "13",
+      "cell_y": "5",
+      "old_evaluation": "16787",
+      "new_evaluation": "7992"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1002",
+      "cell_x": "10",
+      "cell_y": "7",
+      "old_evaluation": "15547",
+      "new_evaluation": "9766"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1002",
+      "cell_x": "16",
+      "cell_y": "3",
+      "old_evaluation": "14957",
+      "new_evaluation": "7996"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "baseline_b_learned_bd_euclidean",
+      "seed": "1002",
+      "cell_x": "19",
+      "cell_y": "14",
+      "old_evaluation": "19092",
+      "new_evaluation": "1756"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1001",
+      "cell_x": "11",
+      "cell_y": "20",
+      "old_evaluation": "14705",
+      "new_evaluation": "5907"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1001",
+      "cell_x": "19",
+      "cell_y": "13",
+      "old_evaluation": "18317",
+      "new_evaluation": "9720"
+    },
+    {
+      "map": "open_robustness",
+      "condition": "contribution_geodesic_niching",
+      "seed": "1002",
+      "cell_x": "20",
+      "cell_y": "12",
+      "old_evaluation": "10884",
+      "new_evaluation": "3844"
+    }
+  ]
+}

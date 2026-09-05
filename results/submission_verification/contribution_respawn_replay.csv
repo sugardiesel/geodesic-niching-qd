@@ -1,0 +1,9 @@
+seed_directory,evaluation,respawn_timing,max_absolute_difference,fitness_difference,steps_difference,food_collected_difference,wall_collisions_difference,hazard_contacts_difference,path_length_difference,displacement_difference,loop_score_difference,bbox_area_difference
+results\phase5\contribution_geodesic_niching\seed_1001,2055,corrected,92.0,-8.62099999999997,-92.0,-2.0,1.0,-2.0,-2.999077320098877,-0.6151145696640015,-4.183188516925551,-1.4028350114822388
+results\phase5\contribution_geodesic_niching\seed_1001,2070,corrected,0.005061745643615723,0.0,0.0,0.0,0.0,0.0,0.00047779083251953125,-0.005061745643615723,-0.0010102608692363901,0.002958536148071289
+results\phase5\contribution_geodesic_niching\seed_1001,2085,corrected,0.05592923169162134,-0.04499999999999904,0.0,0.0,0.0,0.0,0.002997875213623047,0.017384886741638184,0.05592923169162134,0.014286577701568604
+results\phase5\contribution_geodesic_niching\seed_1001,2100,corrected,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2055,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2070,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2085,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2100,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

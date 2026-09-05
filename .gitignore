@@ -48,6 +48,11 @@ results/**/*.pkl
 results/**/checkpoints/
 results/**/archives/
 
+!results/phase5/baseline_b_learned_bd_euclidean/seed_*/representative_trajectory_sample.npz
+!results/phase5/baseline_b_learned_bd_euclidean/seed_*/autoencoder_final.pt
+!results/phase6_open_robustness/baseline_b_learned_bd_euclidean/seed_*/representative_trajectory_sample.npz
+!results/phase6_open_robustness/baseline_b_learned_bd_euclidean/seed_*/autoencoder_final.pt
+
 # Local/editor files
 .idea/
 .vscode/

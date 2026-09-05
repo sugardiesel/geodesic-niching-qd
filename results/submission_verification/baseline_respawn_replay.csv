@@ -1,0 +1,5 @@
+seed_directory,evaluation,respawn_timing,max_absolute_difference,fitness_difference,steps_difference,food_collected_difference,wall_collisions_difference,hazard_contacts_difference,path_length_difference,displacement_difference,loop_score_difference,bbox_area_difference
+results\phase5\baseline_b_learned_bd_euclidean\seed_1002,2441,corrected,0.0003360453071645786,1.7763568394002505e-15,0.0,0.0,0.0,0.0,-5.698204040527344e-05,0.00017514824867248535,0.0003360453071645786,4.887208342552185e-05
+results\phase5\baseline_b_learned_bd_euclidean\seed_1002,3380,corrected,0.001071580789784754,1.7763568394002505e-15,0.0,0.0,0.0,0.0,-0.0004831552505493164,-0.00037057697772979736,0.001071580789784754,0.00014212727546691895
+results\phase5\baseline_b_learned_bd_euclidean\seed_1002,2441,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\baseline_b_learned_bd_euclidean\seed_1002,3380,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
