@@ -1,3 +1,4 @@
+import json
 import unittest
 from pathlib import Path
 
@@ -37,6 +38,49 @@ def elite():
 
 
 class CommonBehaviorRecoveryTests(unittest.TestCase):
+    def test_correction_and_replay_counts_have_distinct_denominators(self):
+        results = Path(__file__).resolve().parents[1] / "results"
+        changes = json.loads(
+            (results / "submission_verification/common_space_identity_changes.json").read_text()
+        )["changes"]
+        elites = read_csv(results / "phase6_common_behavior_space/common_behavior_elites.csv")
+        index = {
+            (r["map"], r["condition"], r["seed"], r["archive_cell_x"], r["archive_cell_y"]): r
+            for r in elites
+        }
+        b_changed = []
+        c_changed = []
+        for change in changes:
+            row = index[
+                tuple(change[key] for key in ("map", "condition", "seed", "cell_x", "cell_y"))
+            ]
+            (b_changed if change["condition"].startswith("baseline") else c_changed).append(row)
+        self.assertEqual(len(b_changed), 15)
+        self.assertEqual(sum(r["match_status"] == "retained_from_retrain" for r in b_changed), 11)
+        self.assertEqual(
+            sum(r["match_status"] == "verified_final_space_descriptor" for r in b_changed), 4
+        )
+        self.assertEqual(
+            sum(
+                r["condition"].startswith("baseline")
+                and r["match_status"] == "verified_final_space_descriptor"
+                for r in elites
+            ),
+            8,
+        )
+        replays = [
+            row
+            for parent in ("phase5", "phase6_open_robustness")
+            for path in (results / parent / "baseline_b_learned_bd_euclidean").glob(
+                "seed_*/recovered_pre_retrain_latents.csv"
+            )
+            for row in read_csv(path)
+        ]
+        self.assertEqual(len(replays), 18)
+        self.assertTrue(all(float(r["max_replay_error"]) <= 1e-8 for r in replays))
+        self.assertEqual(len(c_changed), 7)
+        self.assertTrue(all(float(r["match_descriptor_distance"]) == 0.0 for r in c_changed))
+
     def test_saved_contribution_seed_1002_selects_evaluation_8102(self):
         root = Path(__file__).resolve().parents[1]
         condition = "contribution_geodesic_niching"

@@ -78,6 +78,7 @@ Horseshoe map, five seeds per condition:
 uv run python scripts/run_phase5_sweep.py `
   --protocol configs/production_protocol.yaml `
   --output-dir reproduced/phase5_horseshoe `
+  --food-respawn-timing historical `
   --no-resume
 ```
 
@@ -87,6 +88,7 @@ Open-map robustness check, three seeds per condition:
 uv run python scripts/run_phase5_sweep.py `
   --protocol configs/phase6_open_robustness_protocol.yaml `
   --output-dir reproduced/phase6_open `
+  --food-respawn-timing historical `
   --no-resume
 ```
 
@@ -94,19 +96,22 @@ These are the expensive commands: together they launch 24 searches and can take 
 hours. The committed `results/phase5/` and `results/phase6_open_robustness/` directories contain
 the completed runs used for the final analysis.
 
-Historical replay identified a one-step food-respawn difference between saved production
-trajectories and the current environment. Both checked Baseline B and Contribution policies
-match the historical timing. The commands above use the current corrected environment, so
-they should not be treated as exact historical replay. Post-hoc analysis of committed results
-is unaffected; verified historical replay commands and evidence are in
-`results/submission_verification/README.md`.
+The explicit `--food-respawn-timing historical` option uses the original timer rule for
+reproducing saved experiments. Without an option, the simulator retains the corrected rule,
+which respawns food one step later. The sweep records the selection in generated configs and
+run summaries and refuses to resume results with different or unrecorded timing. No maps,
+fitness weights, search budgets, or graph parameters change with this option.
+
+The compatibility option was checked against saved Baseline B and Contribution policies;
+no new production sweep was run to validate it. Commands for these bounded checks and their
+results are in `results/submission_verification/README.md`.
 
 Individual methods can also be run directly:
 
 ```powershell
-uv run python scripts/run_phase2_map_elites.py --config configs/phase2_handcrafted_map_elites.yaml
-uv run python scripts/run_phase3_aurora_euclidean.py --config configs/phase3_aurora_euclidean.yaml
-uv run python scripts/run_phase4_geodesic_niching.py --config configs/phase4_geodesic_niching.yaml
+uv run python scripts/run_phase2_map_elites.py --config configs/phase2_handcrafted_map_elites.yaml --food-respawn-timing historical
+uv run python scripts/run_phase3_aurora_euclidean.py --config configs/phase3_aurora_euclidean.yaml --food-respawn-timing historical
+uv run python scripts/run_phase4_geodesic_niching.py --config configs/phase4_geodesic_niching.yaml --food-respawn-timing historical
 ```
 
 Baseline B and the Contribution share the architecture and retraining schedule but train

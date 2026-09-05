@@ -16,6 +16,13 @@ The original archive policies, fitness values, and production Table 1 are not ch
 six common-space Wilcoxon p-values remain unchanged, although some metric means change.
 The full identity changes are in `../submission_verification/common_space_identity_changes.json`.
 
+The 18 replays are candidate policies in eight tied Baseline B elite groups, not 18 corrected
+elite matches. Four of these eight matches changed. Another 11 Baseline B corrections were
+resolved using the recorded archive history, without replay. Thus 15 corrections and 18
+replayed candidates count different things. The seven Contribution corrections each have
+exactly zero final-code distance and matching fitness/counters. They were checked against
+saved codes, not by re-simulating those policies.
+
 ## Results
 
 Values are mean +/- sample standard deviation. Coverage is a percentage of 512 common cells.

@@ -1,0 +1,5 @@
+seed_directory,evaluation,respawn_timing,max_absolute_difference,fitness_difference,steps_difference,food_collected_difference,wall_collisions_difference,hazard_contacts_difference,path_length_difference,displacement_difference,loop_score_difference,bbox_area_difference
+results\phase5\contribution_geodesic_niching\seed_1001,2055,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2070,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2085,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+results\phase5\contribution_geodesic_niching\seed_1001,2100,historical,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

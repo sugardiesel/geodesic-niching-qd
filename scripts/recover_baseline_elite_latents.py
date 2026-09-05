@@ -20,9 +20,8 @@ from algorithms.trajectory_autoencoder import (
     load_autoencoder_checkpoint,
     trajectory_to_sequence,
 )
-from envs.forage_maze import load_env_config
+from envs.forage_maze import ForageMaze2D, load_env_config
 from scripts.analyze_common_behavior_space import DATASETS, discrete_key, read_csv, write_csv
-from scripts.correct_phase1_distance_diagnostic import HistoricalPhase1ReplayMaze
 from scripts.run_phase3_aurora_euclidean import trajectory_diagnostics
 
 
@@ -31,7 +30,7 @@ def restore_genomes(rows, config, obs_dim, requested):
     algo = config["algorithm"]
     bootstrap = int(algo["bootstrap_evaluations"])
     retrain = min(algo["retrain_evaluations"])
-    if not requested or max(requested) > retrain:
+    if not requested or min(requested) < 1 or max(requested) > min(retrain, len(rows)):
         raise ValueError("Recovery requires nonempty evaluation indices before the first retrain.")
     rng = np.random.default_rng(int(config["experiment"]["seed"]))
     hidden = int(algo["hidden_dim"])
@@ -87,7 +86,9 @@ def recover_seed(seed_dir: Path) -> int:
     if not requested:
         return 0
     # Baseline B predates the one-step food-respawn correction.
-    env = HistoricalPhase1ReplayMaze(load_env_config(config["experiment"]["env_config"]))
+    env = ForageMaze2D(
+        load_env_config(config["experiment"]["env_config"]), food_respawn_timing="historical"
+    )
     genomes = restore_genomes(rows, config, env.observation_dim, requested)
     checkpoint = seed_dir / "autoencoder_final.pt"
     training, metadata = load_autoencoder_checkpoint(checkpoint, device="cpu")

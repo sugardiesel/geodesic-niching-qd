@@ -15,6 +15,7 @@ import numpy as np
 import yaml
 
 Array = np.ndarray
+FOOD_RESPAWN_TIMINGS = ("corrected", "historical")
 
 
 @dataclass(frozen=True)
@@ -98,7 +99,10 @@ def _circle_rect_intersects(center: Array, radius: float, wall: RectWall) -> boo
 class ForageMaze2D:
     """Continuous 2D foraging/survival task with rectangular walls and circular zones."""
 
-    def __init__(self, config: dict[str, Any]):
+    def __init__(self, config: dict[str, Any], *, food_respawn_timing: str = "corrected"):
+        if food_respawn_timing not in FOOD_RESPAWN_TIMINGS:
+            raise ValueError(f"Unknown food-respawn timing: {food_respawn_timing!r}")
+        self.food_respawn_timing = food_respawn_timing
         self.config = config
         self.episode_cfg = config["episode"]
         self.agent_cfg = config["agent"]
@@ -159,8 +163,10 @@ class ForageMaze2D:
         self.termination = "not_started"
 
     @classmethod
-    def from_config_path(cls, path: str | Path) -> ForageMaze2D:
-        return cls(load_env_config(path))
+    def from_config_path(
+        cls, path: str | Path, *, food_respawn_timing: str = "corrected"
+    ) -> ForageMaze2D:
+        return cls(load_env_config(path), food_respawn_timing=food_respawn_timing)
 
     def reset(self, seed: int | None = None) -> Array:
         self.rng = np.random.default_rng(seed)
@@ -379,7 +385,9 @@ class ForageMaze2D:
             distance = float(np.linalg.norm(self.state.position - food.position))
             if distance <= self.agent_radius + food.radius:
                 food.active = False
-                food.respawn_timer = food.respawn_steps + 1
+                food.respawn_timer = food.respawn_steps + int(
+                    self.food_respawn_timing == "corrected"
+                )
                 self.food_collected += 1
                 reward += food.reward * float(self.fitness_cfg["food_reward_scale"])
                 self.state.energy = min(

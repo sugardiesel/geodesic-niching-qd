@@ -17,12 +17,13 @@ import yaml
 
 from algorithms.map_elites import run_map_elites
 from analysis.phase2_plots import save_archive_heatmap, save_metric_curves
-from envs.forage_maze import ForageMaze2D, load_env_config
+from envs.forage_maze import FOOD_RESPAWN_TIMINGS, ForageMaze2D, load_env_config
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/phase2_handcrafted_map_elites.yaml")
+    parser.add_argument("--food-respawn-timing", choices=FOOD_RESPAWN_TIMINGS)
     args = parser.parse_args()
 
     config = yaml.safe_load(Path(args.config).read_text(encoding="utf-8"))
@@ -30,7 +31,10 @@ def main() -> None:
         raise ValueError(f"{args.config} must contain a mapping.")
 
     env_config_path = config["experiment"]["env_config"]
-    env = ForageMaze2D(load_env_config(env_config_path))
+    timing = args.food_respawn_timing or config["experiment"].get(
+        "food_respawn_timing", "corrected"
+    )
+    env = ForageMaze2D(load_env_config(env_config_path), food_respawn_timing=timing)
     output_dir = Path(config["experiment"]["output_dir"])
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -61,6 +65,7 @@ def main() -> None:
     summary = {
         "config": args.config,
         "env_config": env_config_path,
+        "food_respawn_timing": env.food_respawn_timing,
         "seed": int(config["experiment"]["seed"]),
         "descriptor": config["algorithm"]["descriptor"],
         "grid_bins": config["algorithm"]["grid_bins"],

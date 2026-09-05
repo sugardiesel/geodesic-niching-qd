@@ -27,6 +27,8 @@ import numpy as np
 import yaml
 from scipy.stats import mannwhitneyu, rankdata, wilcoxon
 
+from envs.forage_maze import FOOD_RESPAWN_TIMINGS
+
 CONDITIONS: dict[str, dict[str, str]] = {
     "baseline_a_handcrafted_map_elites": {
         "label": "Baseline A: hand-crafted BD",
@@ -72,12 +74,18 @@ def main() -> None:
     parser.add_argument("--output-dir", default="results/phase5")
     parser.add_argument("--aggregate-only", action="store_true")
     parser.add_argument("--no-resume", action="store_true")
+    parser.add_argument("--food-respawn-timing", choices=FOOD_RESPAWN_TIMINGS)
     args = parser.parse_args()
+
+    if args.aggregate_only and args.food_respawn_timing is not None:
+        parser.error("--food-respawn-timing selects new runs, not --aggregate-only results.")
 
     protocol = yaml.safe_load(Path(args.protocol).read_text(encoding="utf-8"))
     if not isinstance(protocol, dict):
         raise ValueError(f"{args.protocol} must contain a mapping.")
     protocol["protocol_path"] = args.protocol
+    if args.food_respawn_timing is not None:
+        protocol["food_respawn_timing"] = args.food_respawn_timing
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -146,6 +154,11 @@ def make_run_config(
     config["experiment"]["seed"] = int(seed)
     config["experiment"]["output_dir"] = str(run_dir)
     config["experiment"]["production_protocol"] = protocol_path
+    if protocol is not None and "food_respawn_timing" in protocol:
+        timing = protocol["food_respawn_timing"]
+        if timing not in FOOD_RESPAWN_TIMINGS:
+            raise ValueError(f"Unknown food-respawn timing: {timing!r}")
+        config["experiment"]["food_respawn_timing"] = timing
     config["experiment"]["plot_title"] = f"Phase 5 {condition_info['label']} seed {seed}"
     if protocol is not None and protocol.get("env_config_override"):
         config["experiment"]["env_config"] = str(protocol["env_config_override"])
@@ -179,6 +192,14 @@ def make_run_config(
 def run_condition_seed(spec: dict[str, Any], resume: bool) -> None:
     summary_path = Path(spec["summary_path"])
     if resume and summary_path.exists():
+        config = yaml.safe_load(Path(spec["config_path"]).read_text(encoding="utf-8"))
+        expected_timing = config["experiment"].get("food_respawn_timing", "corrected")
+        recorded = json.loads(summary_path.read_text(encoding="utf-8")).get("food_respawn_timing")
+        if recorded != expected_timing:
+            raise ValueError(
+                f"Cannot resume {summary_path}: recorded timing {recorded!r} differs from "
+                f"requested {expected_timing!r}. Use a fresh output directory."
+            )
         print(f"[phase5] skip existing {spec['condition']} seed {spec['seed']}: {summary_path}")
         return
     run_dir = Path(spec["run_dir"])

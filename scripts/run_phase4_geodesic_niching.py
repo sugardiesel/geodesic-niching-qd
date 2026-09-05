@@ -32,7 +32,7 @@ from analysis.phase3_plots import (
     save_latent_archive_heatmap,
     save_reconstruction_examples,
 )
-from envs.forage_maze import ForageMaze2D, load_env_config
+from envs.forage_maze import FOOD_RESPAWN_TIMINGS, ForageMaze2D, load_env_config
 from scripts.run_phase3_aurora_euclidean import (
     autoencoder_loss_note,
     candidate_diag,
@@ -52,6 +52,7 @@ from scripts.run_phase3_aurora_euclidean import (
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/phase4_geodesic_niching.yaml")
+    parser.add_argument("--food-respawn-timing", choices=FOOD_RESPAWN_TIMINGS)
     args = parser.parse_args()
 
     config = yaml.safe_load(Path(args.config).read_text(encoding="utf-8"))
@@ -60,7 +61,12 @@ def main() -> None:
 
     output_dir = Path(config["experiment"]["output_dir"])
     output_dir.mkdir(parents=True, exist_ok=True)
-    env = ForageMaze2D(load_env_config(config["experiment"]["env_config"]))
+    timing = args.food_respawn_timing or config["experiment"].get(
+        "food_respawn_timing", "corrected"
+    )
+    env = ForageMaze2D(
+        load_env_config(config["experiment"]["env_config"]), food_respawn_timing=timing
+    )
 
     start = time.perf_counter()
     result = run_phase4(env, config)
@@ -121,6 +127,7 @@ def main() -> None:
     summary = {
         "config": args.config,
         "env_config": config["experiment"]["env_config"],
+        "food_respawn_timing": env.food_respawn_timing,
         "seed": int(config["experiment"]["seed"]),
         "descriptor": config["algorithm"]["descriptor"],
         "archive_assignment": config["algorithm"]["archive_assignment"],

@@ -51,12 +51,22 @@ evaluation indices relative to commit `ab7a6967fedb467aadd544ec4132b9ddc5f74b74`
 The six paired Wilcoxon p-values are unchanged. Reproduction commands and numerical results
 are in `../phase6_common_behavior_space/README.md`.
 
+The replay denominator is different: 18 candidate policies resolve eight tied Baseline B
+elites. Four of those eight matches changed and four were already correct. Another 11
+Baseline B corrections follow from the recorded archive history without replay. This gives
+15 corrected elite identities, not 15 corrected policies out of 18 replays. All seven corrected
+Contribution identities match their saved final-space descriptor with distance exactly 0.0,
+as well as fitness and episode counters. Those seven policies were not re-simulated.
+
 ## Historical environment timing
 
 Baseline B identity recovery replays 18 historical policies with the original checkpoint.
 Saved fitness, episode counters, and trajectory diagnostics agree within 1e-8; the helper
 aborts otherwise. The original timing sets `respawn_timer = respawn_steps`; the current
-environment sets `respawn_timer = respawn_steps + 1` to account for the immediate decrement.
+default sets `respawn_timer = respawn_steps + 1` to account for the immediate decrement.
+Both rules are now available through `--food-respawn-timing historical|corrected`; the
+default remains corrected. The original Phase 1 compatibility class remains an independent
+reference for the historical rule.
 
 The comparison CSVs here verify both timings on selected saved policies. Two Baseline B
 policies (horseshoe seed 1002, evaluations 2441 and 3380) and four Contribution policies
@@ -72,14 +82,35 @@ Run from the repository root:
 uv run python scripts/verify_historical_respawn_timing.py `
   --seed-dir results/phase5/baseline_b_learned_bd_euclidean/seed_1002 `
   --evaluations 2441 3380 `
+  --food-respawn-timing historical --require-match `
   --output reproduced/baseline_respawn_replay.csv
 uv run python scripts/verify_historical_respawn_timing.py `
   --seed-dir results/phase5/contribution_geodesic_niching/seed_1001 `
   --evaluations 2055 2070 2085 2100 `
+  --food-respawn-timing historical --require-match `
   --output reproduced/contribution_respawn_replay.csv
 ```
 
 Genome recovery uses the saved fitness/assignment history and the original RNG stream. It
 verifies archive insertion decisions and does not evaluate or select new search candidates.
-Only the requested historical policies are evaluated. The main search entry points still
-use the current corrected environment; they have not been silently switched to legacy timing.
+Only the requested historical policies are evaluated. The explicit historical-mode check
+produces zero error in all nine logged diagnostics for the four Contribution policies above
+(`contribution_historical_mode_verification.csv`). All 18 Baseline B identity replays also
+retain zero diagnostic error. `--require-match` exits with an error if any discrepancy exceeds
+1e-8. To compare the two rules instead, use `--food-respawn-timing both` without that assertion.
+
+All three experiment entry points and the sweep accept the same timing option. The sweep
+stores the selection in generated YAML, and each runner records it in its output summary.
+Resume rejects a mismatched or unrecorded timing version; aggregation-only mode does not
+accept a timing override. The README production commands select historical timing explicitly,
+but no new search was run to test this addition. Tests inspect the runner configuration while
+replacing the search function with a stop marker, so they cannot launch evolution.
+
+Verification on 2026-09-05: all 31 unit tests pass, including the replay-count reconciliation,
+historical timer/reference comparison, CLI/config propagation, and resume safeguards. Ruff
+reports no errors. Run these checks without launching a search:
+
+```powershell
+uv run python -m unittest discover -s tests -v
+uv run ruff check .
+```

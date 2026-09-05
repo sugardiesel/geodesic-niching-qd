@@ -22,9 +22,8 @@ if str(ROOT) not in sys.path:
 from algorithms.geodesic_archive import GeodesicGridArchive
 from algorithms.policies import MLPPolicyGenome
 from algorithms.trajectory_autoencoder import trajectory_to_sequence
-from envs.forage_maze import ForageMaze2D, load_env_config
+from envs.forage_maze import FOOD_RESPAWN_TIMINGS, ForageMaze2D, load_env_config
 from scripts.analyze_common_behavior_space import read_csv, write_csv
-from scripts.correct_phase1_distance_diagnostic import HistoricalPhase1ReplayMaze
 from scripts.recover_baseline_elite_latents import restore_genomes
 from scripts.run_phase3_aurora_euclidean import latent_bounds, trajectory_diagnostics
 
@@ -32,7 +31,12 @@ from scripts.run_phase3_aurora_euclidean import latent_bounds, trajectory_diagno
 def restore_geodesic_genomes(rows, config, obs_dim, requested):
     algo = config["algorithm"]
     bootstrap = int(algo["bootstrap_evaluations"])
-    if not requested or max(requested) >= min(algo["retrain_evaluations"]):
+    if (
+        not requested
+        or min(requested) < 1
+        or max(requested) > len(rows)
+        or max(requested) >= min(algo["retrain_evaluations"])
+    ):
         raise ValueError("Only pre-retraining history can be reconstructed here.")
     latents = np.asarray(
         [[float(row["latent_0"]), float(row["latent_1"])] for row in rows], dtype=np.float32
@@ -102,6 +106,10 @@ def main() -> None:
     parser.add_argument("--seed-dir", type=Path, required=True)
     parser.add_argument("--evaluations", type=int, nargs="+", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--food-respawn-timing", choices=(*FOOD_RESPAWN_TIMINGS, "both"), default="both"
+    )
+    parser.add_argument("--require-match", action="store_true")
     args = parser.parse_args()
     contribution = (args.seed_dir / "phase4_summary.json").exists()
     summary_file = "phase4_summary.json" if contribution else "phase3_summary.json"
@@ -113,10 +121,11 @@ def main() -> None:
     recover = restore_geodesic_genomes if contribution else restore_genomes
     genomes = recover(rows, config, current.observation_dim, set(args.evaluations))
     output = []
-    for timing, env in [
-        ("corrected", current),
-        ("historical", HistoricalPhase1ReplayMaze(env_config)),
-    ]:
+    timings = (
+        FOOD_RESPAWN_TIMINGS if args.food_respawn_timing == "both" else [args.food_respawn_timing]
+    )
+    for timing in timings:
+        env = ForageMaze2D(env_config, food_respawn_timing=timing)
         for evaluation in sorted(genomes):
             saved = rows[evaluation - 1]
             rollout = env.rollout(
@@ -169,6 +178,8 @@ def main() -> None:
     write_csv(args.output, output)
     for row in output:
         print(row, flush=True)
+    if args.require_match and any(row["max_absolute_difference"] > 1e-8 for row in output):
+        raise ValueError("Replayed policy diagnostics differ from the saved evaluations.")
 
 
 if __name__ == "__main__":
