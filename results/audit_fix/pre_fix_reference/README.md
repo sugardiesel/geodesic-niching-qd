@@ -11,9 +11,9 @@ and `results/final_summary/`. Production aggregation does not read this folder.
 
 From the repository root:
 
-```powershell
+```text
 uv run python scripts/compare_pre_post_audit_results.py
 ```
 
 The output goes to `results/audit_fix/pre_post_comparison/`. The historical
-comparison is supplementary and must not replace the final tables.
+comparison is separate from the final experiment set.

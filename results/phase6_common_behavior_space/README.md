@@ -1,27 +1,18 @@
 # Common behavior-space analysis
 
 These files use the corrected k=20 Contribution archives and the original Baseline B archives.
-The metric space remains the originally specified 8 x 8 x 8 grid: path efficiency, loop score
+The common space is an 8 x 8 x 8 grid: path efficiency, loop score
 clipped to [0, 12], and food count clipped to [0, 8], normalized to [0, 1].
 
 ## Elite identification
 
-Final-stage insertion records identify Baseline B elites added after retraining. Earlier
-fitness/counter ties require codes from the final encoder, obtained by replaying 18 historical
-policies with the original checkpoint and environment timing. Contribution identities use
-the saved full-run final-space codes. Unresolved matches raise an error.
+Archive insertion records identify Baseline B elites added after retraining. Earlier
+fitness/counter ties are resolved using final-encoder codes from replay of 18 candidate
+policies across eight tied elite groups, with the original checkpoint and environment timing.
+Contribution identities use saved full-run final-space codes. Unresolved matches raise an error.
 
-This corrects 22 of 3,694 previously selected trajectory records (15 Baseline B, 7 Contribution).
-The original archive policies, fitness values, and production Table 1 are not changed. All
-six common-space Wilcoxon p-values remain unchanged, although some metric means change.
-The full identity changes are in `../submission_verification/common_space_identity_changes.json`.
-
-The 18 replays are candidate policies in eight tied Baseline B elite groups, not 18 corrected
-elite matches. Four of these eight matches changed. Another 11 Baseline B corrections were
-resolved using the recorded archive history, without replay. Thus 15 corrections and 18
-replayed candidates count different things. The seven Contribution corrections each have
-exactly zero final-code distance and matching fitness/counters. They were checked against
-saved codes, not by re-simulating those policies.
+`../submission_verification/common_space_identity_changes.json` records the identity
+corrections. The original archive policies and fitness values are not modified by this analysis.
 
 ## Results
 
@@ -43,7 +34,7 @@ Paired Wilcoxon statistics, exact p-values, and rank-biserial effects are in
 
 Run from the repository root:
 
-```powershell
+```text
 uv run python scripts/recover_baseline_elite_latents.py
 uv run python scripts/analyze_common_behavior_space.py
 ```

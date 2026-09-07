@@ -25,8 +25,7 @@ MAP-Elites.
 - `data/phase1_horseshoe_u_bottom_detour_provenance.csv`: shortest-path provenance for the
   reported horseshoe landmark pair.
 - [`../phase6_common_behavior_space/`](../phase6_common_behavior_space/): common-space metrics
-  and paired tests after final-encoder elite-identity verification. Its README gives the
-  reproduction commands; the production tables above are unchanged.
+  and paired tests, with elite identification and reproduction details.
 
 Files prefixed by `horseshoe_` and `open_` are unmodified copies of the source aggregate outputs.
 `artifact_manifest.csv` maps packaged artifacts to the original result files or generating code.
@@ -43,7 +42,7 @@ centroids out of 625 at the locked `k=20`.
 
 ## Rebuild
 
-```powershell
+```text
 uv run python scripts/prepare_report_inputs.py
 uv run python scripts/audit_rolling_only_k_sensitivity.py
 uv run python analysis/report_k_sensitivity_figure.py --layout vertical

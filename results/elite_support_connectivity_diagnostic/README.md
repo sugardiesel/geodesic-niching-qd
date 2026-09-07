@@ -106,13 +106,11 @@ k-NN rule, even when successful elite locations are retained.
 
 ## Reproduction
 
-From the repository root in PowerShell:
+From the repository root:
 
-```powershell
-.\.venv\Scripts\python.exe scripts\audit_elite_support_connectivity.py
-.\.venv\Scripts\python.exe -m pytest
+```text
+uv run python scripts/audit_elite_support_connectivity.py
 ```
 
-The diagnostic takes roughly 3.5 minutes on the audited machine and performs no environment
-rollouts or evolutionary search. Per-seed static, snapshot, and all-refresh tables are saved next
-to this README.
+Outputs include per-seed and aggregate tables for the static samples, dynamic snapshots,
+and all post-retraining graph refreshes.

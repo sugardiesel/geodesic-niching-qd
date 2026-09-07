@@ -99,24 +99,36 @@ an intrinsic coverage-for-quality trade-off. It is confounded by endpoint/grid s
 
 ## Reproduction
 
-From the repository root in PowerShell:
+Run these commands from the repository root. They use saved trajectories and assignment
+records; they do not launch a new search.
 
-```powershell
-.\.venv\Scripts\python.exe scripts\phase3_knn_k_sensitivity.py --sample-npz results\phase5\baseline_b_learned_bd_euclidean\seed_1001\representative_trajectory_sample.npz --k-values 3 5 10 20 30 --output-dir results\audit_connectivity_verification\static_horseshoe_seed_1001
-.\.venv\Scripts\python.exe scripts\phase3_knn_k_sensitivity.py --sample-npz results\phase6_open_robustness\baseline_b_learned_bd_euclidean\seed_1001\representative_trajectory_sample.npz --k-values 3 5 10 20 30 --output-dir results\audit_connectivity_verification\static_open_seed_1001
+### Static samples
 
-$seeds = 1001, 1002, 1003, 1004, 1005
-foreach ($seed in $seeds) {
-    .\.venv\Scripts\python.exe scripts\phase4_dynamic_graph_k_sensitivity.py --phase4-dir "results\phase5\contribution_geodesic_niching\seed_$seed" --config "results\phase5\configs\contribution_geodesic_niching_seed_$seed.yaml" --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir "results\audit_connectivity_verification\dynamic_horseshoe_seed_$seed"
-}
-
-$seeds = 1001, 1002, 1003
-foreach ($seed in $seeds) {
-    .\.venv\Scripts\python.exe scripts\phase4_dynamic_graph_k_sensitivity.py --phase4-dir "results\phase6_open_robustness\contribution_geodesic_niching\seed_$seed" --config "results\phase6_open_robustness\configs\contribution_geodesic_niching_seed_$seed.yaml" --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir "results\audit_connectivity_verification\dynamic_open_seed_$seed"
-}
-
-.\.venv\Scripts\python.exe scripts\audit_geodesic_connectivity_penalty.py
+```text
+uv run python scripts/phase3_knn_k_sensitivity.py --sample-npz results/phase5/baseline_b_learned_bd_euclidean/seed_1001/representative_trajectory_sample.npz --k-values 3 5 10 20 30 --output-dir results/audit_connectivity_verification/static_horseshoe_seed_1001
+uv run python scripts/phase3_knn_k_sensitivity.py --sample-npz results/phase6_open_robustness/baseline_b_learned_bd_euclidean/seed_1001/representative_trajectory_sample.npz --k-values 3 5 10 20 30 --output-dir results/audit_connectivity_verification/static_open_seed_1001
 ```
 
-The dynamic per-seed CSVs are under `dynamic_<map>_seed_<seed>/`. The combined exact tables and
-JSON summary are under `penalty_audit/`.
+### Dynamic snapshots
+
+```text
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase5/contribution_geodesic_niching/seed_1001 --config results/phase5/configs/contribution_geodesic_niching_seed_1001.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_horseshoe_seed_1001
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase5/contribution_geodesic_niching/seed_1002 --config results/phase5/configs/contribution_geodesic_niching_seed_1002.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_horseshoe_seed_1002
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase5/contribution_geodesic_niching/seed_1003 --config results/phase5/configs/contribution_geodesic_niching_seed_1003.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_horseshoe_seed_1003
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase5/contribution_geodesic_niching/seed_1004 --config results/phase5/configs/contribution_geodesic_niching_seed_1004.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_horseshoe_seed_1004
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase5/contribution_geodesic_niching/seed_1005 --config results/phase5/configs/contribution_geodesic_niching_seed_1005.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_horseshoe_seed_1005
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase6_open_robustness/contribution_geodesic_niching/seed_1001 --config results/phase6_open_robustness/configs/contribution_geodesic_niching_seed_1001.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_open_seed_1001
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase6_open_robustness/contribution_geodesic_niching/seed_1002 --config results/phase6_open_robustness/configs/contribution_geodesic_niching_seed_1002.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_open_seed_1002
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py --phase4-dir results/phase6_open_robustness/contribution_geodesic_niching/seed_1003 --config results/phase6_open_robustness/configs/contribution_geodesic_niching_seed_1003.yaml --snapshots 2000 10000 20000 --k-values 3 5 10 20 30 --rolling-buffer-size 1000 --output-dir results/audit_connectivity_verification/dynamic_open_seed_1003
+```
+
+### Full refresh history
+
+```text
+uv run python scripts/audit_geodesic_connectivity_penalty.py
+uv run python scripts/audit_rolling_only_k_sensitivity.py
+```
+
+Per-seed snapshot tables are in `dynamic_<map>_seed_<seed>/`. Exact replay results are in
+`penalty_audit/`; the all-refresh k-sensitivity tables are in
+`rolling_only_full_refresh_k_sensitivity/`.
