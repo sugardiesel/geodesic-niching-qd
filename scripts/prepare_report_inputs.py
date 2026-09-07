@@ -388,8 +388,20 @@ def main() -> None:
     copy_figures(manifest)
     make_paired_heatmap(manifest)
     make_horseshoe_detour_figure(manifest)
-    write_csv(OUTPUT_DIR / "artifact_manifest.csv", manifest)
+    write_manifest(manifest)
     print(f"Prepared {len(manifest)} final result artifacts in {OUTPUT_DIR}")
+
+
+def write_manifest(manifest: list[dict[str, str]]) -> None:
+    path = OUTPUT_DIR / "artifact_manifest.csv"
+    files = {row["file"] for row in manifest}
+    # Other diagnostic scripts register their outputs in the same manifest.
+    if path.exists():
+        for row in read_csv(path):
+            if row["file"] not in files and (OUTPUT_DIR / row["file"]).is_file():
+                manifest.append(row)
+                files.add(row["file"])
+    write_csv(path, manifest)
 
 
 if __name__ == "__main__":

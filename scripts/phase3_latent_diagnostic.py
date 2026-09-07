@@ -36,7 +36,10 @@ from scripts.run_phase1_validation import run_diagnostic_rollouts
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase3-config", default="configs/phase3_aurora_euclidean.yaml")
+    parser.add_argument(
+        "--phase3-config",
+        default="results/phase5/configs/baseline_b_learned_bd_euclidean_seed_1001.yaml",
+    )
     parser.add_argument(
         "--checkpoint",
         default="",
@@ -49,29 +52,28 @@ def main() -> None:
     )
     parser.add_argument("--archive-summary", default="")
     parser.add_argument("--pairs-csv", default="")
-    parser.add_argument("--output-dir", default="results/phase3_latent_diagnostic")
+    parser.add_argument("--output-dir", default="reproduced/phase3_latent_diagnostic")
     parser.add_argument("--device", default="auto")
     args = parser.parse_args()
 
     phase3_config = yaml.safe_load(Path(args.phase3_config).read_text(encoding="utf-8"))
     if not isinstance(phase3_config, dict):
         raise ValueError(f"{args.phase3_config} must contain a mapping.")
+    run_dir = Path(str(phase3_config["experiment"]["output_dir"]).replace("\\", "/"))
     checkpoint = (
         Path(args.checkpoint)
         if args.checkpoint
-        else Path(phase3_config["experiment"]["output_dir"]) / "autoencoder_final.pt"
+        else run_dir / "autoencoder_final.pt"
     )
     if not checkpoint.exists():
         raise FileNotFoundError(
             f"Missing locked Baseline B checkpoint: {checkpoint}. "
-            "Rerun scripts/run_phase3_aurora_euclidean.py with "
-            "configs/phase3_aurora_euclidean.yaml first."
+            "Use the committed production checkpoint or pass --checkpoint for another run."
         )
     sample_npz = (
         Path(args.sample_npz)
         if args.sample_npz
-        else Path(phase3_config["experiment"]["output_dir"])
-        / "representative_trajectory_sample.npz"
+        else run_dir / "representative_trajectory_sample.npz"
     )
 
     output_dir = Path(args.output_dir)
@@ -90,14 +92,14 @@ def main() -> None:
             archive_summary_path=(
                 Path(args.archive_summary)
                 if args.archive_summary
-                else Path(phase3_config["experiment"]["output_dir"]) / "phase3_summary.json"
+                else run_dir / "phase3_summary.json"
             ),
         )
     else:
         if not args.pairs_csv:
             raise FileNotFoundError(
                 f"Missing representative sample: {sample_npz}. "
-                "Rerun the locked Phase 3 baseline to generate it, or pass --pairs-csv for the "
+                "Pass --sample-npz for a saved run, or --pairs-csv for the "
                 "legacy Phase 1.5 diagnostic."
             )
         summary = run_legacy_phase1_pair_diagnostic(
@@ -109,6 +111,7 @@ def main() -> None:
             training=training,
             metadata=metadata,
         )
+    summary["phase3_config"] = args.phase3_config
     summary["output_files"].append(str(output_dir / "phase3_latent_diagnostic_summary.json"))
     (output_dir / "phase3_latent_diagnostic_summary.json").write_text(
         json.dumps(summary, indent=2), encoding="utf-8"
@@ -155,7 +158,6 @@ def run_representative_sample_diagnostic(
     write_csv(enriched_csv, pair_data)
     return {
         "diagnostic_mode": "representative_locked_baseline_b_run_sample",
-        "phase3_config": str(Path("configs/phase3_aurora_euclidean.yaml")),
         "checkpoint": str(checkpoint),
         "sample_npz": str(sample_npz),
         "env_config": phase3_config["experiment"]["env_config"],
@@ -211,7 +213,6 @@ def run_legacy_phase1_pair_diagnostic(
     write_csv(enriched_csv, pair_data)
     return {
         "diagnostic_mode": "legacy_phase1_5_validation_rollouts",
-        "phase3_config": str(Path("configs/phase3_aurora_euclidean.yaml")),
         "checkpoint": str(checkpoint),
         "pairs_csv": str(pairs_csv),
         "env_config": phase3_config["experiment"]["env_config"],

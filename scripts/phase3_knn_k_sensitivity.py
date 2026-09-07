@@ -33,11 +33,11 @@ def main() -> None:
     parser.add_argument(
         "--sample-npz",
         default=(
-            "results/phase3b_aurora_one_retrain_normalized_seed_1001/"
+            "results/phase5/baseline_b_learned_bd_euclidean/seed_1001/"
             "representative_trajectory_sample.npz"
         ),
     )
-    parser.add_argument("--output-dir", default="results/phase3_knn_k_sensitivity")
+    parser.add_argument("--output-dir", default="reproduced/phase3_knn_k_sensitivity")
     parser.add_argument("--k-values", default="3,5,10,20,30")
     args = parser.parse_args()
 
@@ -45,7 +45,7 @@ def main() -> None:
     if not sample_npz.exists():
         raise FileNotFoundError(
             f"Missing representative sample: {sample_npz}. "
-            "Run scripts/run_phase3_aurora_euclidean.py first."
+            "Pass --sample-npz for another completed run."
         )
 
     output_dir = Path(args.output_dir)

@@ -497,8 +497,9 @@ def save_plots(
     axes[0].set_xticks(x, seeds)
     axes[0].set_xlabel("seed")
     axes[0].set_ylabel("loop fraction")
-    axes[0].set_title("Eval 2001-10000 loop rates")
-    axes[0].legend(frameon=False, fontsize=8)
+    axes[0].set_title("Eval 2001-10000 loop rates", pad=28)
+    axes[0].legend(frameon=False, fontsize=8, loc="lower center",
+                   bbox_to_anchor=(0.5, 1.0), ncol=2)
 
     selected = ["path_length", "loop_score", "fitness", "bbox_area"]
     positions = np.arange(len(selected))
@@ -520,8 +521,9 @@ def save_plots(
     axes[1].bar(positions + width / 2, overlaps, width, label="hist. overlap")
     axes[1].set_xticks(positions, selected, rotation=20, ha="right")
     axes[1].set_ylim(0.0, 1.05)
-    axes[1].set_title("Distribution similarity")
-    axes[1].legend(frameon=False, fontsize=8)
+    axes[1].set_title("Distribution similarity", pad=28)
+    axes[1].legend(frameon=False, fontsize=8, loc="lower center",
+                   bbox_to_anchor=(0.5, 1.0), ncol=2)
 
     paths = [output_stem.with_suffix(".png"), output_stem.with_suffix(".pdf")]
     for path in paths:

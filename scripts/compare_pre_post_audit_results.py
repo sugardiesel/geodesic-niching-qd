@@ -12,11 +12,11 @@ from scipy.stats import rankdata, wilcoxon
 
 DATASETS = {
     "horseshoe": (
-        Path("results_pre_audit_fix/phase5"),
+        Path("results/audit_fix/pre_fix_reference/phase5"),
         Path("results/phase5"),
     ),
     "open_robustness": (
-        Path("results_pre_audit_fix/phase6_open_robustness"),
+        Path("results/audit_fix/pre_fix_reference/phase6_open_robustness"),
         Path("results/phase6_open_robustness"),
     ),
 }

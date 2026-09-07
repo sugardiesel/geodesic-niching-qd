@@ -151,6 +151,21 @@ uv run python scripts/audit_elite_support_connectivity.py
 The connectivity audits are post-hoc replays and do not rerun MAP-Elites. See the script help and
 the README files in their result directories for the longer per-seed diagnostic commands.
 
+The single-run latent and graph diagnostics default to the committed horseshoe production
+seed 1001, so they do not require an earlier development run:
+
+```powershell
+uv run python scripts/phase3_latent_diagnostic.py
+uv run python scripts/phase3_knn_k_sensitivity.py
+uv run python scripts/phase4_dynamic_graph_k_sensitivity.py
+uv run python scripts/validate_phase4_geodesic_approximation.py
+```
+
+These four commands write to `reproduced/`, preserving the older development diagnostics.
+For another seed or map, pass its saved config and data paths using the options shown by
+`--help`. The historical pre/post comparison has its small input set in
+`results/audit_fix/pre_fix_reference/`; it is separate from the final results.
+
 The original Baseline B sample NPZs and final encoder checkpoints are included. The samples are
 required by the static elite-retention audit. Common-space analysis uses the saved final encoder
 coordinates and recorded archive insertions to recover elite identities. To regenerate the small

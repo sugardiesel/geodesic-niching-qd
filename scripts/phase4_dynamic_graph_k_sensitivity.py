@@ -33,9 +33,13 @@ from algorithms.knn_graph import (
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase4-dir", default="results/phase4_geodesic_niching_seed_1001")
-    parser.add_argument("--config", default="configs/phase4_geodesic_niching.yaml")
-    parser.add_argument("--output-dir", default="results/phase4_dynamic_graph_k_sensitivity")
+    parser.add_argument(
+        "--phase4-dir", default="results/phase5/contribution_geodesic_niching/seed_1001"
+    )
+    parser.add_argument(
+        "--config", default="results/phase5/configs/contribution_geodesic_niching_seed_1001.yaml"
+    )
+    parser.add_argument("--output-dir", default="reproduced/phase4_dynamic_graph_k_sensitivity")
     parser.add_argument("--snapshots", default="2000,10000,20000")
     parser.add_argument("--k-values", default="3,5,10,20,30")
     parser.add_argument("--rolling-buffer-size", type=int, default=1000)

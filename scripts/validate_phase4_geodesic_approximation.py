@@ -28,23 +28,30 @@ from algorithms.knn_graph import (
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase4-dir", default="results/phase4_geodesic_niching_seed_1001")
-    parser.add_argument("--config", default="configs/phase4_geodesic_niching.yaml")
+    parser.add_argument(
+        "--phase4-dir", default="results/phase5/contribution_geodesic_niching/seed_1001"
+    )
+    parser.add_argument(
+        "--config", default="results/phase5/configs/contribution_geodesic_niching_seed_1001.yaml"
+    )
     parser.add_argument("--pairs", type=int, default=200)
+    parser.add_argument("--output-dir", default="reproduced/phase4_geodesic_approximation")
     parser.add_argument("--seed", type=int, default=20260701)
     args = parser.parse_args()
 
-    output_dir = Path(args.phase4_dir)
+    run_dir = Path(args.phase4_dir)
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     config = yaml.safe_load(Path(args.config).read_text(encoding="utf-8"))
     graph_k = int(config["geodesic"]["graph_k"])
     attach_k = int(config["geodesic"]["assignment_k"])
 
-    archive_points = read_points(output_dir / "archive_cells.csv", "descriptor_x", "descriptor_y")
+    archive_points = read_points(run_dir / "archive_cells.csv", "descriptor_x", "descriptor_y")
     support_points, support_endpoint_mask = read_support_points(
-        output_dir / "geodesic_graph_support_points.csv"
+        run_dir / "geodesic_graph_support_points.csv"
     )
     full_points = read_points(
-        output_dir / "visited_latents_final_space.csv", "latent_0", "latent_1"
+        run_dir / "visited_latents_final_space.csv", "latent_0", "latent_1"
     )
 
     start = time.perf_counter()

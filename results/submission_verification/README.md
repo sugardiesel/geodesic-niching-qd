@@ -1,5 +1,43 @@
 # Submission verification
 
+## Clean-checkout checks, 2026-09-07
+
+The submission was cloned into a separate directory and installed with
+`uv sync --frozen --extra dev` on Windows 11, Python 3.12.14, and PyTorch
+2.11.0+cu128. CUDA detected the RTX 5070.
+
+- All 41 tests pass; Ruff reports no errors. The remaining library warnings are
+  Matplotlib/Pyparsing deprecations.
+- All 24 scripts were exercised. Search entry points used small budgets;
+  aggregation, graph checks, and other analyses used the saved production data.
+- Each method completed a 300-evaluation historical-timing check on each map.
+  The learned methods used 80 bootstrap evaluations, one retraining at 160,
+  five training epochs, and a 10 x 10 grid. These six checks are not production results.
+- The historical Baseline B and Contribution replay commands below pass.
+- Numerical comparisons of 66 regenerated CSV tables agree within 1e-8 absolute
+  and 1e-10 relative tolerance. Local provenance paths differ between checkouts.
+  This includes the common-space tests, both maps' disagreement analyses, and
+  the rolling-only and elite-retention connectivity diagnostics.
+
+This pass corrected diagnostic defaults that pointed to unpublished development
+inputs, included the small historical summaries required by the pre/post comparison,
+and prevented aggregation or skipped/rejected resume attempts from rewriting saved
+run configs. Figure-manifest entries now survive repeated summary preparation.
+Ten additional tests cover these cases. The supplementary encoder-pool comparison
+was also regenerated from the corrected production runs; its own README records
+that provenance. The simulator, algorithms, production configs, and main result
+tables were not changed, and no 20,000-evaluation search was rerun.
+
+```powershell
+uv sync --frozen --extra dev
+uv run pytest -q
+uv run ruff check .
+uv run python scripts/prepare_report_inputs.py
+```
+
+The root README lists the other tested commands. These checks cover the submitted
+Windows environment, not every possible platform or dependency configuration.
+
 ## Penalty counter
 
 `GeodesicGridArchive.refresh_graph()` calls `endpoint_shortest_path_distances()` and passes

@@ -102,7 +102,6 @@ def build_run_specs(protocol: dict[str, Any], output_dir: Path) -> list[dict[str
     total_evaluations = int(budget["total_evaluations_per_seed"])
     specs: list[dict[str, Any]] = []
     config_dir = output_dir / "configs"
-    config_dir.mkdir(parents=True, exist_ok=True)
     for condition in budget["conditions"]:
         if condition not in CONDITIONS:
             raise ValueError(f"Unknown Phase 5 condition: {condition}")
@@ -121,7 +120,6 @@ def build_run_specs(protocol: dict[str, Any], output_dir: Path) -> list[dict[str
                     protocol.get("protocol_path", "configs/production_protocol.yaml")
                 ),
             )
-            config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
             specs.append(
                 {
                     "condition": condition,
@@ -129,6 +127,7 @@ def build_run_specs(protocol: dict[str, Any], output_dir: Path) -> list[dict[str
                     "seed": seed,
                     "script": condition_info["script"],
                     "config_path": config_path,
+                    "config": config,
                     "run_dir": run_dir,
                     "summary_path": run_dir / condition_info["summary"],
                     "heatmap_stem": condition_info["heatmap_stem"],
@@ -191,8 +190,10 @@ def make_run_config(
 
 def run_condition_seed(spec: dict[str, Any], resume: bool) -> None:
     summary_path = Path(spec["summary_path"])
-    if resume and summary_path.exists():
+    config = spec.get("config")
+    if config is None:
         config = yaml.safe_load(Path(spec["config_path"]).read_text(encoding="utf-8"))
+    if resume and summary_path.exists():
         expected_timing = config["experiment"].get("food_respawn_timing", "corrected")
         recorded = json.loads(summary_path.read_text(encoding="utf-8")).get("food_respawn_timing")
         if recorded != expected_timing:
@@ -204,6 +205,9 @@ def run_condition_seed(spec: dict[str, Any], resume: bool) -> None:
         return
     run_dir = Path(spec["run_dir"])
     run_dir.mkdir(parents=True, exist_ok=True)
+    config_path = Path(spec["config_path"])
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
     log_path = run_dir / "phase5_run.log"
     command = [sys.executable, spec["script"], "--config", str(spec["config_path"])]
     print(f"[phase5] start {spec['condition']} seed {spec['seed']}")
